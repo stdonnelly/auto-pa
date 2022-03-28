@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PA sound scheduler</title>
+    <link rel="stylesheet" type="text/css" href="pa_common.css">
+</head>
+<body>
+<header>
+    <!--Navigation bar-->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="configure_sounds.html">Configure schedule</a>
+        <a href="configure_clock.html">Set system clock</a>
+        <a href="status.html">System status</a>
+    </nav>
+</header>
+
+<!-- Current date and time -->
+<h1>Current Time</h1>
+<h2>System</h2>
+<!-- The date and time, according to the server, using server-side scripts
+This will be used for scheduling, since the server cannot connect to the internet to set its own time -->
+<p>
+    March 4, 2022<br>
+    12:00:00
+</p>
+<h2>Device</h2>
+<!-- This one will use client-side JavaScript in order to compare the server with the (usually more correct) client -->
+<p>
+    March 4, 2022<br>
+    12:00:00
+</p>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PA sound scheduler</title>
+    <link rel="stylesheet" type="text/css" href="pa_common.css">
+</head>
+<body>
+<header>
+    <!--Navigation bar-->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="configure_sounds.html">Configure schedule</a>
+        <a href="configure_clock.html">Set system clock</a>
+        <a href="status.html">System status</a>
+    </nav>
+</header>
+
+<table>
+    <caption><h1>Sound schedule</h1></caption>
+    <!-- The following table is an example, the actual one will be constructed using JavaScript -->
+    <tr>
+        <th scope="col">Filename</th>
+        <th scope="col">Time</th>
+        <th scope="col">Weekdays</th>
+        <th scope="col">Start</th>
+        <th scope="col">End</th>
+    </tr>
+    <tr>
+        <td>song.mp3</td>
+        <td>06:00</td>
+        <td>MTWRF</td>
+        <td>2022-06-19</td>
+        <td>2022-07-23</td>
+    </tr>
+    <tr>
+        <td>effect.mp3</td>
+        <td>12:00</td>
+        <td>MW</td>
+        <td>None</td>
+        <td>2022-08-20</td>
+    </tr>
+    <tr>
+        <td>sound.mp3</td>
+        <td>23:00</td>
+        <td>SA</td>
+        <td>2022-03-05</td>
+        <td>2022-03-06</td>
+    </tr>
+</table>
+<p>
+    <!-- This attempts to emulate buttons.
+         I will probably either make the buttons more like this, or make this more like buttons. -->
+    <a href="add_task.html" class="schedule_sound_button">New task</a>
+    <a href="remove_or_configure_task.html" class="schedule_sound_button">Remove or configure tasks</a>
+</p>
+</body>
+</html>

@@ -1,0 +1,48 @@
+nav {
+    display: grid;
+    /* I want the links to be exactly the same width, so I'm using fractional width
+    https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout#the_fr_unit */
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    /* I essentially took the color scheme from the nav bar on the council website
+    https://www.piedmontcouncilbsa.org/ */
+    background-color: #f5f5f5;
+}
+
+nav > a {
+    text-align: center;
+    border: 1px solid #c0c0c0;
+    padding: 12px 0;
+    font-size: 1.5em;
+    /* color: #7b7676; This seemed too light */
+}
+
+nav > a:hover {
+    color: #ce1126;
+    background-color: #eeeeee;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid;
+}
+
+/* I may put these in page-specific CSS files */
+.log {
+    border: 1px solid black;
+}
+
+a.schedule_sound_button {
+    padding: 5px;
+    border: 1px solid #c0c0c0;
+    margin-right: 10px;
+    background-color: #f5f5f5;
+}

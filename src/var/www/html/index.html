@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PA sound scheduler</title>
+    <link rel="stylesheet" type="text/css" href="pa_common.css">
+</head>
+<body>
+<header>
+    <!--Navigation bar-->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="configure_sounds.html">Configure schedule</a>
+        <a href="configure_clock.html">Set system clock</a>
+        <a href="status.html">System status</a>
+    </nav>
+</header>
+
+<!-- Current date and time
+     This will also be a hyperlink to the "set system clock" page -->
+<a href="configure_clock.html">
+    <!-- div is used so the whole area, not just text, is a hyperlink -->
+    <div>
+        <h1>Current Time</h1>
+        <h2>System</h2>
+        <!-- The date and time, according to the server, using server-side scripts
+        This will be used for scheduling, since the server cannot connect to the internet to set its own time -->
+        <p>
+            March 4, 2022<br>
+            12:00:00
+        </p>
+        <h2>Device</h2>
+        <!-- This one will use client-side JavaScript in order to compare the server with the (usually more correct) client -->
+        <p>
+            March 4, 2022<br>
+            12:00:00
+        </p>
+    </div>
+</a>
+
+<!-- This will also link to the "configure schedule" page -->
+<a href="configure_sounds.html">
+    <table>
+        <caption><h1>Sound schedule</h1></caption>
+        <!-- The following table is an example, the actual one will be construction using JavaScript -->
+        <tr>
+            <th scope="col">Filename</th>
+            <th scope="col">Time</th>
+            <th scope="col">Weekdays</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+        </tr>
+        <tr>
+            <td>song.mp3</td>
+            <td>06:00</td>
+            <td>MTWRF</td>
+            <td>2022-06-19</td>
+            <td>2022-07-23</td>
+        </tr>
+        <tr>
+            <td>effect.mp3</td>
+            <td>12:00</td>
+            <td>MW</td>
+            <td>None</td>
+            <td>2022-08-20</td>
+        </tr>
+        <tr>
+            <td>sound.mp3</td>
+            <td>23:00</td>
+            <td>SA</td>
+            <td>2022-03-05</td>
+            <td>2022-03-06</td>
+        </tr>
+    </table>
+</a>
+
+</body>
+</html>
