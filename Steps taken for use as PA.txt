@@ -1,0 +1,47 @@
+apt install vim
+
+# https://thepi.io/how-to-use-your-raspberry-pi-as-a-wireless-access-point/
+sudo apt install hostapd
+sudo apt install dnsmasq
+sudo systemctl stop hostapd
+sudo systemctl stop dnsmasq
+
+# NO Use /etc/network/interfaces
+# Append /etc/dhcpcd.conf
+interface wlan0
+static ip_address=192.168.4.1/24
+
+sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+
+# Create /etc/dnsmasq.conf. Just look at the file
+interface=wlan0
+dhcp-range=192.168.4.3,192.168.4.24,255.255.255.0,24h
+domain=wlan
+address=/gw.wlan/192.168.4.1
+
+# Create /etc/hostapd/hostapd.conf
+country_code=US
+interface=wlan0
+driver=nl80211
+hw_mode=g
+channel=1
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+# May be helpful? Yes, it increases security
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+ssid=PA configuration
+wpa_passphrase=raspberry
+
+Edit /etc/default/hostapd
+#DAEMON_CONF="" -> DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+sudo systemctl unmask hostapd
+
+# https://forums.raspberrypi.com/viewtopic.php?t=279500
+comment out everything in /etc/network/interfaces
+
+Reboot
