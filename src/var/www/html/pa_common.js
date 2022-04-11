@@ -1,16 +1,5 @@
 $( function () {
 
-    // All of these if statements are so the functions only trigger on elements that are actually present.
-    // I may separate these into separate JavaScript files
-    // Tabs for status.html
-    let $logTabs = $("#logs-tabs");
-    if ($logTabs.length > 0) {
-        $logTabs.tabs({
-            heightStyle: "auto"
-
-        });
-    }
-
     // Initialize the clocks
     let $serverClock = $("#server-clock");
     let $clientClock = $("#client-clock");
@@ -37,6 +26,19 @@ $( function () {
     // Generate the tables
     if ($("table").length > 0) {
         updateTables();
+    }
+
+    // All of these if statements are so the functions only trigger on elements that are actually present.
+    // I may separate these into separate JavaScript files
+    // Tabs for status.html
+    let $logTabs = $("#logs-tabs");
+    if ($logTabs.length > 0) {
+        // updateTables();
+
+        $logTabs.tabs({
+            heightStyle: "auto"
+
+        });
     }
 });
 
@@ -66,7 +68,24 @@ function updateTables() {
             "end_date": "2022-03-06"
         }
     ]`;
-    let taskList = JSON.parse(taskListJSON);
+    let taskList = JSON.parse(taskListJSON, function (key, value) {
+        if (key.endsWith('_date')) {
+            if (value) {
+                // Change the string to an array so that the Date constructor works
+                // https://stackoverflow.com/questions/33908299/javascript-parse-a-string-to-date-as-local-time-zone
+                let ymd = value.split('-');
+
+                // Parse the array
+                return new Date(ymd[0], ymd[1] - 1, ymd[2]);
+            } else {
+                return null;
+            }
+        }
+        return value;
+    });
+
+    // $("#log-3 > code").text(JSON.stringify(taskList, null, '    '));
+    // hljs.highlightAll();
 
     let $scheduleTable = $("#schedule-table tbody");
 
@@ -91,8 +110,10 @@ function updateTables() {
             $row.append($("<td>").text(task.sound_file));
             $row.append($("<td>").text(task.play_time));
             $row.append($("<td>").text(task.week_days));
-            $row.append($("<td>").text(task.start_date));
-            $row.append($("<td>").text(task.end_date));
+
+            // Check if the last two are null before trying to parse using a simple conditional expression
+            $row.append($("<td>").text(task.start_date ? task.start_date.toLocaleDateString() : 'Immediately'));
+            $row.append($("<td>").text(task.end_date ? task.end_date.toLocaleDateString() : 'Never'));
 
             $newTable.append($row);
         }
