@@ -1,11 +1,6 @@
-[submodule "jquery"]
-	path = jquery
-	url = https://github.com/jquery/jquery
 [submodule "submodules/jquery"]
 	path = submodules/jquery
 	url = https://github.com/jquery/jquery
-	branch = 3.x-stable
-[submodule "https://github.com/jquery/jquery"]
 	branch = 3.x-stable
 [submodule "submodules/jquery-timepicker"]
 	path = submodules/jquery-timepicker
