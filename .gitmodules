@@ -1,0 +1,15 @@
+[submodule "jquery"]
+	path = jquery
+	url = https://github.com/jquery/jquery
+[submodule "submodules/jquery"]
+	path = submodules/jquery
+	url = https://github.com/jquery/jquery
+	branch = 3.x-stable
+[submodule "https://github.com/jquery/jquery"]
+	branch = 3.x-stable
+[submodule "submodules/jquery-timepicker"]
+	path = submodules/jquery-timepicker
+	url = https://github.com/jonthornton/jquery-timepicker
+[submodule "submodules/jQuery-Clock-Plugin"]
+	path = submodules/jQuery-Clock-Plugin
+	url = https://github.com/JohnRDOrazio/jQuery-Clock-Plugin

@@ -3,10 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>PA sound scheduler</title>
+
+    <!-- Short statement to prevent a request for favicon.ico -->
+    <!-- https://stackoverflow.com/questions/1321878/how-to-prevent-favicon-ico-requests -->
+    <link rel="icon" type="image/ico" href="data:,">
+
+    <!-- External libraries and stylesheets. Will be moved to locally stored for production -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JQuery UI -->
+    <link rel="stylesheet" type="text/css" href="jquery-ui-1.13.1.custom/jquery-ui.css">
+    <script src="jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
+
+    <!-- Clock plugin from: https://github.com/JohnRDOrazio/jQuery-Clock-Plugin -->
+    <link rel="stylesheet" type="text/css" href="multilingual-digital-clock/jqClock.css">
+    <script src="multilingual-digital-clock/jqClock-lite.min.js"></script>
+
+    <!-- Timepicker Plugin for jQuery from: https://github.com/jonthornton/jquery-timepicker -->
+    <link rel="stylesheet" type="text/css" href="jquery.timepicker/jquery.timepicker.css">
+    <script src="jquery.timepicker/jquery.timepicker.min.js"></script>
+
+    <!-- My stylesheets and code -->
     <link rel="stylesheet" type="text/css" href="pa_common.css">
+    <script src="pa_common.js"></script>
 </head>
 <body>
 <header>
+    <!-- Title -->
+    <h1>PA system sound scheduler</h1>
     <!--Navigation bar-->
     <nav>
         <a href="index.html">Home</a>
@@ -17,18 +41,29 @@
 </header>
 
 <!-- This page will probably be for log files -->
-<h2>Contents of log.txt:</h2>
-<p class="log">
-    2022-03-05T23:00:00 : Played sound.mp3<br>
-    2022-06-20T06:00:00 : Played song.mp3<br>
-    2022-06-20T12:00:00 : Played effect.mp3<br>
-    2022-06-21T06:00:00 : Played song.mp3<br>
-    2022-06-22T06:00:00 : Played song.mp3<br>
-    2022-06-22T12:00:00 : Played effect.mp3<br>
-</p>
-<h2>Contents of log2.txt:</h2>
-<p class="log">
-    2022-03-06T00:00:00 : Removed sound.mp3<br>
-</p>
+<h2>System logs</h2>
+<div id="logs-tabs">
+    <ul>
+        <li><a href="#log-1">log.txt</a></li>
+        <li><a href="#log-2">log2.txt</a></li>
+    </ul>
+    <div id="log-1" class="log">
+        2022-03-05T23:00:00 : Played sound.mp3<br>
+        2022-06-20T06:00:00 : Played song.mp3<br>
+        2022-06-20T12:00:00 : Played effect.mp3<br>
+        2022-06-21T06:00:00 : Played song.mp3<br>
+        2022-06-22T06:00:00 : Played song.mp3<br>
+        2022-06-22T12:00:00 : Played effect.mp3
+    </div>
+    <div id="log-2" class="log">
+        2022-03-06T00:00:00 : Removed sound.mp3
+    </div>
+</div>
+
+<footer>
+    Created by Samuel Donnelly for <a href="https://www.piedmontcouncilbsa.org/cbs">BSA Camp Bud Schiele</a>
+    <!-- This will likely get removed because it may be trademarked -->
+    <a href="https://www.scouting.org"><img src="https://www.scouting.org/wp-content/uploads/2021/08/BSALogo.png" alt="BSA Logo" height="56"></a>
+</footer>
+
 </body>
-</html>

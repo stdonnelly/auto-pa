@@ -3,10 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>PA sound scheduler</title>
+
+    <!-- Short statement to prevent a request for favicon.ico -->
+    <!-- https://stackoverflow.com/questions/1321878/how-to-prevent-favicon-ico-requests -->
+    <link rel="icon" type="image/ico" href="data:,">
+
+    <!-- External libraries and stylesheets. Will be moved to locally stored for production -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JQuery UI -->
+    <link rel="stylesheet" type="text/css" href="jquery-ui-1.13.1.custom/jquery-ui.css">
+    <script src="jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
+
+    <!-- Clock plugin from: https://github.com/JohnRDOrazio/jQuery-Clock-Plugin -->
+    <link rel="stylesheet" type="text/css" href="multilingual-digital-clock/jqClock.css">
+    <script src="multilingual-digital-clock/jqClock-lite.min.js"></script>
+
+    <!-- Timepicker Plugin for jQuery from: https://github.com/jonthornton/jquery-timepicker -->
+    <link rel="stylesheet" type="text/css" href="jquery.timepicker/jquery.timepicker.css">
+    <script src="jquery.timepicker/jquery.timepicker.min.js"></script>
+
+    <!-- My stylesheets and code -->
     <link rel="stylesheet" type="text/css" href="pa_common.css">
+    <script src="pa_common.js"></script>
 </head>
 <body>
 <header>
+    <!-- Title -->
+    <h1>PA system sound scheduler</h1>
     <!--Navigation bar-->
     <nav>
         <a href="index.html">Home</a>
@@ -16,43 +40,24 @@
     </nav>
 </header>
 
-<table>
-    <caption><h1>Sound schedule</h1></caption>
+<table id="schedule-table">
+    <caption><h2>Sound schedule</h2></caption>
     <!-- The following table is an example, the actual one will be constructed using JavaScript -->
-    <tr>
-        <th scope="col">Filename</th>
-        <th scope="col">Time</th>
-        <th scope="col">Weekdays</th>
-        <th scope="col">Start</th>
-        <th scope="col">End</th>
-    </tr>
-    <tr>
-        <td>song.mp3</td>
-        <td>06:00</td>
-        <td>MTWRF</td>
-        <td>2022-06-19</td>
-        <td>2022-07-23</td>
-    </tr>
-    <tr>
-        <td>effect.mp3</td>
-        <td>12:00</td>
-        <td>MW</td>
-        <td>None</td>
-        <td>2022-08-20</td>
-    </tr>
-    <tr>
-        <td>sound.mp3</td>
-        <td>23:00</td>
-        <td>SA</td>
-        <td>2022-03-05</td>
-        <td>2022-03-06</td>
-    </tr>
+    <tbody></tbody>
 </table>
+
 <p>
     <!-- This attempts to emulate buttons.
          I will probably either make the buttons more like this, or make this more like buttons. -->
-    <a href="add_task.html" class="schedule_sound_button">New task</a>
-    <a href="remove_or_configure_task.html" class="schedule_sound_button">Remove or configure tasks</a>
+    <a href="add_task.html" class="button">New task</a>
+    <a href="remove_or_configure_task.html" class="button">Remove or configure tasks</a>
 </p>
+
+<footer>
+    Created by Samuel Donnelly for <a href="https://www.piedmontcouncilbsa.org/cbs">BSA Camp Bud Schiele</a>
+    <!-- This will likely get removed because it may be trademarked -->
+    <a href="https://www.scouting.org"><img src="https://www.scouting.org/wp-content/uploads/2021/08/BSALogo.png" alt="BSA Logo" height="56"></a>
+</footer>
+
 </body>
 </html>

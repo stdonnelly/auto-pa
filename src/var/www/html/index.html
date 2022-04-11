@@ -3,10 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>PA sound scheduler</title>
+
+    <!-- External libraries and stylesheets. Will be locally stored for production to avoid the need for internet -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Short statement to prevent a request for favicon.ico -->
+    <!-- https://stackoverflow.com/questions/1321878/how-to-prevent-favicon-ico-requests -->
+    <link rel="icon" type="image/ico" href="data:,">
+
+    <!-- JQuery UI (custom theme) -->
+    <link rel="stylesheet" type="text/css" href="jquery-ui-1.13.1.custom/jquery-ui.css">
+    <script src="jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
+
+    <!-- Clock plugin from: https://github.com/JohnRDOrazio/jQuery-Clock-Plugin -->
+    <link rel="stylesheet" type="text/css" href="multilingual-digital-clock/jqClock.css">
+    <script src="multilingual-digital-clock/jqClock-lite.min.js"></script>
+
+    <!-- Timepicker Plugin for jQuery from: https://github.com/jonthornton/jquery-timepicker -->
+    <link rel="stylesheet" type="text/css" href="jquery.timepicker/jquery.timepicker.css">
+    <script src="jquery.timepicker/jquery.timepicker.min.js"></script>
+
+    <!-- My stylesheets and code -->
     <link rel="stylesheet" type="text/css" href="pa_common.css">
+    <script src="pa_common.js"></script>
 </head>
 <body>
 <header>
+    <!-- Title -->
+    <h1>PA system sound scheduler</h1>
     <!--Navigation bar-->
     <nav>
         <a href="index.html">Home</a>
@@ -18,61 +42,38 @@
 
 <!-- Current date and time
      This will also be a hyperlink to the "set system clock" page -->
-<a href="configure_clock.html">
-    <!-- div is used so the whole area, not just text, is a hyperlink -->
-    <div>
-        <h1>Current Time</h1>
-        <h2>System</h2>
-        <!-- The date and time, according to the server, using server-side scripts
-        This will be used for scheduling, since the server cannot connect to the internet to set its own time -->
-        <p>
-            March 4, 2022<br>
-            12:00:00
-        </p>
-        <h2>Device</h2>
-        <!-- This one will use client-side JavaScript in order to compare the server with the (usually more correct) client -->
-        <p>
-            March 4, 2022<br>
-            12:00:00
-        </p>
-    </div>
-</a>
+<section id="clock-section">
+    <a href="configure_clock.html">
+        <!-- div is used so the whole area, not just text, is a hyperlink -->
+        <div>
+            <h2>Current Time</h2>
+            <h3>PA System</h3>
+            <!-- The date and time, according to the server, using server-side scripts
+            This will be used for scheduling, since the server cannot connect to the internet to set its own time -->
+            <div id="server-clock"></div>
+            <h3>Your Device</h3>
+            <!-- This one will use client-side JavaScript in order to compare the server with the (usually more correct) client -->
+            <div id="client-clock"></div>
+        </div>
+    </a>
+</section>
 
 <!-- This will also link to the "configure schedule" page -->
+<section id="table-section">
 <a href="configure_sounds.html">
-    <table>
-        <caption><h1>Sound schedule</h1></caption>
+    <table id="schedule-table">
+        <caption><h2>Sound schedule</h2></caption>
         <!-- The following table is an example, the actual one will be construction using JavaScript -->
-        <tr>
-            <th scope="col">Filename</th>
-            <th scope="col">Time</th>
-            <th scope="col">Weekdays</th>
-            <th scope="col">Start</th>
-            <th scope="col">End</th>
-        </tr>
-        <tr>
-            <td>song.mp3</td>
-            <td>06:00</td>
-            <td>MTWRF</td>
-            <td>2022-06-19</td>
-            <td>2022-07-23</td>
-        </tr>
-        <tr>
-            <td>effect.mp3</td>
-            <td>12:00</td>
-            <td>MW</td>
-            <td>None</td>
-            <td>2022-08-20</td>
-        </tr>
-        <tr>
-            <td>sound.mp3</td>
-            <td>23:00</td>
-            <td>SA</td>
-            <td>2022-03-05</td>
-            <td>2022-03-06</td>
-        </tr>
+        <tbody></tbody>
     </table>
 </a>
+</section>
+
+<footer>
+    Created by Samuel Donnelly for <a href="https://www.piedmontcouncilbsa.org/cbs">BSA Camp Bud Schiele</a>
+    <!-- This will likely get removed because it may be trademarked -->
+    <a href="https://www.scouting.org"><img src="https://www.scouting.org/wp-content/uploads/2021/08/BSALogo.png" alt="BSA Logo" height="56"></a>
+</footer>
 
 </body>
 </html>
