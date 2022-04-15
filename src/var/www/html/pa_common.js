@@ -7,7 +7,8 @@ $( function () {
     if ($serverClock.length > 0 || $clientClock > 0) {
 
         // Server clock
-        // TODO: Get server time. Temporarily set to January 1, 2000, midnight
+
+        // Placeholder server time
         let serverTime = new Date("2000-01-01T00:00:00").getTime();
         $serverClock.clock({
             "timestamp": serverTime
@@ -15,6 +16,21 @@ $( function () {
 
         // Client clock: Much easier.
         $clientClock.clock();
+
+        // Get server time via response headers (very dumb, but it works)
+        $.ajax({
+            // No url, because get current page is fine
+            method: "HEAD", // I only want headers
+            success: function(data, textStatus, jqXHR) {
+                serverTime = Date.parse(jqXHR.getResponseHeader("date"));
+                $serverClock.clock({
+                    "timestamp": serverTime
+                });
+            },
+            error: function() {
+                console.log("Error while getting time");
+            }
+        });
     }
 
     // Use jQuery timepicker because the html time input is garbage to work with
@@ -34,7 +50,6 @@ $( function () {
     let $logTabs = $("#logs-tabs");
     if ($logTabs.length > 0) {
         // updateTables();
-
         $logTabs.tabs({
             heightStyle: "auto"
 
