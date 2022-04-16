@@ -11,9 +11,9 @@
 auto wlan0
 iface wlan0 inet static
  address 192.168.4.1
- netmask 255.255.255.0
+ netmask 255.255.255.240
  network 192.168.4.0
- broadcast 192.168.4.255
+ broadcast 192.168.4.15
 
 # This was needed when IP-based virtual hosts was used by Apache
 # It basically just assigns this computer another IP address
