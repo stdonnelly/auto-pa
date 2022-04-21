@@ -13,4 +13,4 @@ fi
 
 # Make sure all required packages are installed
 # List of required packages
-packages=("vlc" "hostapd" "dnsmasq" "nodejs")
+packages=("vlc" "hostapd" "dnsmasq" "nodejs" "npm")

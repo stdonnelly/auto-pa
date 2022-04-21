@@ -8,16 +8,19 @@ This project was used for BSA Camp Bud Schiele, the summer camp for the [Piedmon
 There is also a configuration interface accessable by a captive portal on the WiFi network hosted by the Pi.
 
 ## Installation
-TODO
+`sudo ./install.sh`
 
-## Requires:
+This will also install the required packages using apt if they are not already installed.
+
+## Requirements
 - Raspberry Pi OS
     - Lite probably works
     - Tested on Raspberry Pi OS with desktop (32-bit) from January 28th 2022
 - hostapd
 - dnsmasq
 - VLC media player (cvlc is used to play sounds)
-- Apache HTTP Server
+- Node.js
+- npm
 
 ## Citation
 This section will be for guides used to create this project
