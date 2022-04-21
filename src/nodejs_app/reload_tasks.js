@@ -1,4 +1,4 @@
-exports.reloadTasks = function () {
+const reloadTasks = function () {
     const fs = require('fs');
     const { exec } = require('child_process');
 
@@ -56,3 +56,5 @@ exports.reloadTasks = function () {
         }
     });
 }
+
+module.exports = reloadTasks;
