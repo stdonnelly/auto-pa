@@ -8,8 +8,7 @@ const api = require('./api')
 
 // Static GET/HEAD requests
 app.head('/');
-app.use('/multilingual-digital-clock', express.static('../../submodules/jQuery-Clock-Plugin/'));
-app.use('/jquery.timepicker', express.static('../../submodules/jquery-timepicker/'));
+app.use('/submodules', express.static('../../submodules/'));
 app.use(express.static('../var/www/html/'));
 
 // Dynamic requests
