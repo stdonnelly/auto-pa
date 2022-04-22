@@ -4,7 +4,6 @@ const app = express();
 const port = 3000;
 
 // My modules
-const reloadTasks = require('./reload_tasks');
 const api = require('./api')
 
 // Static GET/HEAD requests
