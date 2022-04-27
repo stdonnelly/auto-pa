@@ -6,6 +6,9 @@ const reloadTasks = require('./reload_tasks');
 // const taskListFile = '/var/pa/task_list.json';
 const taskListFile = '/home/samuel/Programs/PA/src/test_song_list.json';
 
+// Use parser
+router.use(express.json());
+
 // GET task list
 router.get('/task_list.json', function(req, res) {
     res.sendFile(taskListFile);
@@ -52,10 +55,14 @@ router.delete('/task_list_item', function(req, res) {
 });
 
 // POST requests
-router.post('/task_list_item', function(req, res) {
-    console.log(req.query.index);
-});
+// router.post('/task_list_item', function(req, res) {
+//     console.log(req.query.index);
+// });
 // Add item
+router.post('/task_list_item', function(req, res) {
+    //req.body
+});
+
 // Edit item
 
 module.exports = router;
