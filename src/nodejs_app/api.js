@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
+const {exec} = require('child_process');
 const reloadTasks = require('./reload_tasks');
 
 // const taskListFile = '/var/pa/task_list.json';
@@ -42,7 +43,7 @@ router.delete('/task_list_item', function(req, res) {
         }
     }
 
-    fs.writeFile(taskListFile, JSON.stringify(taskList, null, 4), function(err) {
+    fs.writeFile(taskListFile, JSON.stringify(newTaskList, null, 4), function(err) {
         if (err) {
             console.log("Error while deleting task:");
             console.log(err);
@@ -55,14 +56,37 @@ router.delete('/task_list_item', function(req, res) {
 });
 
 // POST requests
-// router.post('/task_list_item', function(req, res) {
-//     console.log(req.query.index);
-// });
+
 // Add item
 router.post('/task_list_item', function(req, res) {
-    //req.body
+    // Get task list (I should probably be using promises instead of sync)
+    let taskList = JSON.parse(fs.readFileSync(taskListFile, 'utf-8'));
+
+    // Add the task (unsafe)
+    let index = taskList.push(req.body) - 1;
+    
+    fs.writeFile(taskListFile, JSON.stringify(taskList, null, 4), function(err) {
+        if (err) {
+            console.log("Error while adding task:");
+            console.log(err);
+            res.status(500).json({error: err});
+        }
+        res.json({success: `Successfully added task ${index}`});
+
+        reloadTasks();
+    });
 });
 
-// Edit item
+// TODO: Edit item
+router.post('/task_list_item', function(req, res) {
+
+});
+
+// Play now (this is a major security flaw, but I don't care right now)
+router.post('/play/:filename', function(req, res) {
+    let filename = 'soundFolder/' + req.params.filename;
+
+    exec(`cvlc ${filename} --play-and-exit >> /var/log/auto-pa/vlc_manual.log 2>&1`);
+});
 
 module.exports = router;
