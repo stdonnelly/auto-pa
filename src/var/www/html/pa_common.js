@@ -1,5 +1,3 @@
-let taskListJSON;
-
 $(function () {
 
     // Initialize the clocks
@@ -49,7 +47,7 @@ $(function () {
     let $time = $("#play_time");
     if ($time.length > 0) {
         // Using 24hr time because I don't want to deal with am/pm nonsense
-        $time.timepicker({ timeFormat: 'H:i' });
+        $time.timepicker({timeFormat: 'H:i'});
     }
 
     // Update taskListJSON
@@ -71,7 +69,6 @@ $(function () {
     // });
 
     // Emulated ITIS 3135 version
-    taskListJSON = localStorage.getItem('taskList');
     updateTables();
 
     // All of these if statements are so the functions only trigger on elements that are actually present.
@@ -88,12 +85,13 @@ $(function () {
 
     // Assign buttons
     $("#add_task").submit(addTask);
+    $("#remove_tasks").click(removeTasks);
 });
 
 // This is a function because it will be used by multiple functions whenever I can change the JSON
 function updateTables() {
-    // Get task list JSON file from server. Temporarily using a hardcoded JSON.
-    let taskList = JSON.parse(taskListJSON, function (key, value) {
+    // Get task list JSON file from server
+    let taskList = JSON.parse(localStorage.getItem('taskList'), function (key, value) {
         if (key.endsWith('_date')) {
             if (value) {
                 // Change the string to an array so that the Date constructor works
@@ -112,7 +110,7 @@ function updateTables() {
     // $("#log-3 > code").text(JSON.stringify(taskList, null, '    '));
     // hljs.highlightAll();
 
-    let $scheduleTable = $("#schedule-table tbody");
+    let $scheduleTable = $("table tbody");
 
     // Check if there is a table
     if ($scheduleTable.length > 0) {
@@ -147,6 +145,25 @@ function updateTables() {
         }
 
         $scheduleTable.replaceWith($newTable);
+
+        // Add checkboxes if the table is the one in remove_or_configure_task.html
+        let $cTable = $("#checkbox-table tr");
+        // Add header for the checkboxes
+        $cTable.first().append($("<th scope='col'>").text("Select"));
+
+        for (let i = 1; i < $cTable.length; i++) {
+            let $input = $("<input>")
+            $input.attr({
+                type: "checkbox",
+                "class": "table_box",
+                "value": i - 1
+            });
+
+            // enable/disable buttons as needed when checked or unchecked
+            $input.change(enableButtons);
+
+            $cTable.eq(i).append($("<td>").append($input));
+        }
     }
 }
 
@@ -174,34 +191,22 @@ function addTask(event) {
 
     // If the task does not already exist, add it
     // Check is new task exists
-    // let exists = true;
-    // checkTask:
-    // for (const task of taskList) {
-    //     // Check each element
-    //     for (const key in task) {
-    //         if (task[key] !== newTask[key]) {
-    //             exists = false;
-    //             break checkTask;
-    //         }
-    //     }
-    // }
-
     let exists = false;
     checkTask:
-    for (const task of taskList) {
+        for (const task of taskList) {
 
-        // Check each element
-        for (const taskKey in task) {
-            // Break if not identical
-            if (task[taskKey] !== newTask[taskKey]) {
-                continue checkTask;
+            // Check each element
+            for (const taskKey in task) {
+                // Break if not identical
+                if (task[taskKey] !== newTask[taskKey]) {
+                    continue checkTask;
+                }
             }
-        }
 
-        // If the for loop does not break, mark as exists
-        exists = true;
-        break;
-    }
+            // If the for loop does not break, mark as exists
+            exists = true;
+            break;
+        }
 
     if (!exists) {
         taskList.push(newTask);
@@ -223,4 +228,47 @@ function addTask(event) {
     // });
 
     event.preventDefault();
+}
+
+function removeTasks() {
+    let taskList = JSON.parse(localStorage.getItem('taskList'));
+
+    let checkedBoxes = $.map($(".table_box:checked"), function (checkedBox) {
+        return parseInt($(checkedBox).val());
+    });
+
+    // Probably a dumb way of removing tasks
+    let newTaskList = [];
+    for (const i in taskList) {
+        // Skip if the index is listed as one to delete
+        if (!checkedBoxes.includes(parseInt(i))) {
+            newTaskList.push(taskList[i]);
+        }
+    }
+
+    // Update localStorage and reload table
+    localStorage.setItem('taskList', JSON.stringify(newTaskList));
+
+    updateTables();
+}
+
+function enableButtons() {
+    // Check how many boxes are checked
+    let numBoxes = $(".table_box:checked").length;
+
+    if (numBoxes > 0) {
+        // Enable remove tasks button
+        $("#remove_tasks").prop("disabled", false);
+    } else {
+        // Disable the button
+        $("#remove_tasks").prop("disabled", true);
+    }
+
+    if (numBoxes === 1) {
+        // Enable modify task
+        $("#modify_task").prop("disabled", false);
+    } else {
+        // Disable the button
+        $("#modify_task").prop("disabled", true);
+    }
 }

@@ -40,34 +40,36 @@
     </nav>
 </header>
 
-<!-- Current date and time
+<main>
+    <!-- Current date and time
      This will also be a hyperlink to the "set system clock" page -->
-<section id="clock-section">
-    <a href="configure_clock.html">
-        <!-- div is used so the whole area, not just text, is a hyperlink -->
-        <div>
-            <h2>Current Time</h2>
-            <h3>PA System</h3>
-            <!-- The date and time, according to the server, using server-side scripts
-            This will be used for scheduling, since the server cannot connect to the internet to set its own time -->
-            <div id="server-clock"></div>
-            <h3>Your Device</h3>
-            <!-- This one will use client-side JavaScript in order to compare the server with the (usually more correct) client -->
-            <div id="client-clock"></div>
-        </div>
-    </a>
-</section>
+    <section id="clock-section">
+        <a href="configure_clock.html">
+            <!-- div is used so the whole area, not just text, is a hyperlink -->
+            <div>
+                <h2>Current Time</h2>
+                <h3>PA System</h3>
+                <!-- The date and time, according to the server, using server-side scripts
+                This will be used for scheduling, since the server cannot connect to the internet to set its own time -->
+                <div id="server-clock"></div>
+                <h3>Your Device</h3>
+                <!-- This one will use client-side JavaScript in order to compare the server with the (usually more correct) client -->
+                <div id="client-clock"></div>
+            </div>
+        </a>
+    </section>
 
-<!-- This will also link to the "configure schedule" page -->
-<section id="table-section">
-<a href="configure_sounds.html">
-    <table id="schedule-table">
-        <caption><h2>Sound schedule</h2></caption>
-        <!-- The following table is an example, the actual one will be construction using JavaScript -->
-        <tbody></tbody>
-    </table>
-</a>
-</section>
+    <!-- This will also link to the "configure schedule" page -->
+    <section id="table-section">
+        <a href="configure_sounds.html">
+            <table>
+                <caption><h2>Sound schedule</h2></caption>
+                <!-- Auto generated -->
+                <tbody></tbody>
+            </table>
+        </a>
+    </section>
+</main>
 
 <footer>
     Created by Samuel Donnelly for <a href="https://www.piedmontcouncilbsa.org/cbs">BSA Camp Bud Schiele</a>

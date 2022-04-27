@@ -40,54 +40,22 @@
     </nav>
 </header>
 
-<section id="table-section">
-    <form>
-        <table>
-            <caption><h2>Sound schedule</h2></caption>
-            <!-- The following table is an example, the actual one will be constructed using JavaScript -->
-            <!-- TODO auto generate this with auto-generated inputs -->
-            <tbody>
-            <tr>
-                <th scope="col">Filename</th>
-                <th scope="col">Time</th>
-                <th scope="col">Weekdays</th>
-                <th scope="col">Start</th>
-                <th scope="col">End</th>
-                <th scope="col">Select</th>
-            </tr>
-            <tr>
-                <td>song.mp3</td>
-                <td>06:00</td>
-                <td>MTWRF</td>
-                <td>2022-06-19</td>
-                <td>2022-07-23</td>
-                <td><input type="checkbox" name="item0" id="item0"></td>
-            </tr>
-            <tr>
-                <td>effect.mp3</td>
-                <td>12:00</td>
-                <td>MW</td>
-                <td>None</td>
-                <td>2022-08-20</td>
-                <td><input type="checkbox" name="item1" id="item1"></td>
-            </tr>
-            <tr>
-                <td>sound.mp3</td>
-                <td>23:00</td>
-                <td>SA</td>
-                <td>2022-03-05</td>
-                <td>2022-03-06</td>
-                <td><input type="checkbox" name="item2" id="item2"></td>
-            </tr>
-            </tbody>
-        </table>
+<main>
+    <section id="table-section">
+        <form>
+            <table id="checkbox-table">
+                <caption><h2>Sound schedule</h2></caption>
+                <!-- This will be auto generated -->
+                <tbody></tbody>
+            </table>
 
-        <!--Remove tasks will be enabled if at least one task is selected-->
-        <input type="button" value="Remove tasks" disabled>
-        <!--Modify task will only be available if one and only one task is selected-->
-        <input type="button" value="Modify task" disabled>
-    </form>
-</section>
+            <!--Remove tasks will be enabled if at least one task is selected-->
+            <input type="button" value="Remove tasks" id="remove_tasks" disabled>
+            <!--Modify task will only be available if one and only one task is selected-->
+            <input type="button" value="Modify task" id="modify_task" disabled>
+        </form>
+    </section>
+</main>
 
 <footer>
     Created by Samuel Donnelly for <a href="https://www.piedmontcouncilbsa.org/cbs">BSA Camp Bud Schiele</a>
