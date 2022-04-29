@@ -1,13 +1,15 @@
+const taskListFile = '/home/samuel/Programs/PA/src/test_song_list.json';
+
 const reloadTasks = function () {
     const fs = require('fs');
     const { exec } = require('child_process');
 
     // Import song list JSON
-    let taskList = JSON.parse(fs.readFileSync('test_song_list.json'));
+    let taskList = JSON.parse(fs.readFileSync(taskListFile));
 
-    // Print contents
-    console.log('Tast list as JSON:');
-    console.log(taskList);
+    // // Print contents
+    // console.log('Tast list as JSON:');
+    // console.log(taskList);
 
     // Object for weekdays formatted using crontab
     let weekdays = {
@@ -41,18 +43,19 @@ const reloadTasks = function () {
         // Get all the weekdays except the last comma
         weeks = weeks.substring(0, weeks.length - 1);
 
-        crontabData += `${min} ${hour} * * ${weeks} cvlc ${listEntry.sound_file} --play-and-exit >> ~/Documents/cvlc.log 2>&1\n`
+        crontabData += `${min} ${hour} * * ${weeks} cvlc ${listEntry.sound_file} --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1\n`
     }
 
+    console.log("crontab file:");
     console.log(crontabData);
 
     fs.writeFile('/tmp/pa_crontab', crontabData, function (err) {
         if (err) {
-            // TODO:
-            console.log('Error while writing file');
+            console.log('Error while writing file:');
+            console.log(err);
         } else {
             // Update crontab
-            exec('sudo crontab -u auto-pa /tmp/pa_crontab');
+            exec('crontab -u auto-pa /tmp/pa_crontab');
         }
     });
 }

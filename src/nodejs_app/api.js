@@ -4,7 +4,7 @@ const fs = require('fs');
 const {exec} = require('child_process');
 const reloadTasks = require('./reload_tasks');
 
-// const taskListFile = '/var/pa/task_list.json';
+// const taskListFile = '/var/auto-pa/task_list.json';
 const taskListFile = '/home/samuel/Programs/PA/src/test_song_list.json';
 
 // Use parser
@@ -36,10 +36,13 @@ router.delete('/task_list_item', function(req, res) {
     let taskList = JSON.parse(fs.readFileSync(taskListFile, 'utf-8'));
     let newTaskList = [];
 
+    console.log(`[${new Date().toISOString()}]: Deleting items:`)
     for (const i in taskList) {
         // Skip if the index is listed as one to delete
         if (!index.includes(i)) {
             newTaskList.push(taskList[i]);
+        } else {
+            console.log("    " + taskList[i]);
         }
     }
 
@@ -48,10 +51,13 @@ router.delete('/task_list_item', function(req, res) {
             console.log("Error while deleting task:");
             console.log(err);
             res.status(500).json({error: err});
-        }
-        res.json({success: `Successfully deleted tasks ${index}`});
+        } else {
+            res.json({success: `Successfully deleted tasks ${index}`});
 
-        reloadTasks();
+            console.log("Successfully deleted tasks");
+
+            reloadTasks();
+        }
     });
 });
 
@@ -62,19 +68,48 @@ router.post('/task_list_item', function(req, res) {
     // Get task list (I should probably be using promises instead of sync)
     let taskList = JSON.parse(fs.readFileSync(taskListFile, 'utf-8'));
 
-    // Add the task (unsafe)
-    let index = taskList.push(req.body) - 1;
-    
-    fs.writeFile(taskListFile, JSON.stringify(taskList, null, 4), function(err) {
-        if (err) {
-            console.log("Error while adding task:");
-            console.log(err);
-            res.status(500).json({error: err});
-        }
-        res.json({success: `Successfully added task ${index}`});
+    console.log(`[${new Date().toISOString()}]: Adding task:`);
+    console.log(req.body);
 
-        reloadTasks();
-    });
+    // If the task does not already exist, add it
+    // Check if new task exists
+    let exists = false;
+    checkTask:
+        for (const task of taskList) {
+
+            // Check each element
+            for (const taskKey in task) {
+                // Break if not identical
+                if (task[taskKey] !== req.body[taskKey]) {
+                    continue checkTask;
+                }
+            }
+
+            // If the for loop does not break, mark as exists
+            exists = true;
+            break;
+        }
+    
+    if (exists) {
+        res.json({success: "Task already exists"});
+    } else {
+        // Add the task (unsafe)
+        let index = taskList.push(req.body) - 1;
+        
+        fs.writeFile(taskListFile, JSON.stringify(taskList, null, 4), function(err) {
+            if (err) {
+                console.log("Error while adding task:");
+                console.log(err);
+                res.status(500).json({error: err});
+            } else {
+                res.json({success: `Successfully added task ${index}`});
+
+                console.log("Successfully added task");
+
+                reloadTasks();
+            }
+        });
+    }
 });
 
 // TODO: Edit item

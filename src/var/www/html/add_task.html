@@ -40,41 +40,45 @@
     </nav>
 </header>
 
-<form id="add_task">
-    <h2>New task</h2>
-    <label for="file_name">Sound file to play: </label>
-    <select name="file_name" id="file_name" required>
-        <option>song.mp3</option>
-        <option>effect.mp3</option>
-        <option>sound.mp3</option>
-        <option>noise.mp3</option>
-    </select>
-    <br>
-    <label for="play_time">Time to play: </label>
-    <input type="text" name="time" id="play_time" size="7" required>
-    <br>
-    <!-- Every week day if left blank -->
-    <label for="week_days">Week days:</label><br>
-    <select name="week_days" id="week_days" size="7" multiple>
-        <option value="U">Sunday</option>
-        <option value="M">Monday</option>
-        <option value="T">Tuesday</option>
-        <option value="W">Wednesday</option>
-        <option value="R">Thursday</option>
-        <option value="F">Friday</option>
-        <option value="S">Saturday</option>
-    </select>
-    <br>
-    <!-- Neither start nor end are required (leave blank to begin immediately / never end) -->
-    <label for="start_date">Start date: </label>
-    <input type="date" name="start_date" id="start_date">
-    <br>
-    <label for="end_date">End date: </label>
-    <input type="date" name="end_date" id="end_date">
-    <br>
+<main>
+    <section>
+        <form id="add_task">
+            <h2>New task</h2>
+            <label for="file_name">Sound file to play: </label>
+            <select name="file_name" id="file_name" required>
+                <option>song.mp3</option>
+                <option>effect.mp3</option>
+                <option>sound.mp3</option>
+                <option>noise.mp3</option>
+            </select>
+            <br>
+            <label for="play_time">Time to play: </label>
+            <input type="text" name="time" id="play_time" size="7" required>
+            <br>
+            <!-- Every week day if left blank -->
+            <label for="week_days">Week days:</label><br>
+            <select name="week_days" id="week_days" size="7" multiple>
+                <option value="U">Sunday</option>
+                <option value="M">Monday</option>
+                <option value="T">Tuesday</option>
+                <option value="W">Wednesday</option>
+                <option value="R">Thursday</option>
+                <option value="F">Friday</option>
+                <option value="S">Saturday</option>
+            </select>
+            <br>
+            <!-- Neither start nor end are required (leave blank to begin immediately / never end) -->
+            <label for="start_date">Start date: </label>
+            <input type="date" name="start_date" id="start_date">
+            <br>
+            <label for="end_date">End date: </label>
+            <input type="date" name="end_date" id="end_date">
+            <br>
 
-    <input type="submit" value="Add task">
-</form>
+            <input type="submit" value="Add task">
+        </form>
+    </section>
+</main>
 
 <footer>
     Created by Samuel Donnelly for <a href="https://www.piedmontcouncilbsa.org/cbs">BSA Camp Bud Schiele</a>

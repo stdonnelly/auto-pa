@@ -47,12 +47,18 @@ a:not(footer > a) {
     color: black;
 }
 
+main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
 section {
     padding: 5px;
     margin: 15px;
     background-color: lightskyblue;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 table {
@@ -69,6 +75,7 @@ table, th, td {
 
 /* I may put these in page-specific CSS files */
 .log {
+    white-space: pre-wrap;
     border: 1px solid black;
     text-align: left;
     font-family: "Courier New", Courier, monospace;
@@ -88,6 +95,11 @@ table, th, td {
     border: 1px solid #c0c0c0;
     margin: 5px;
     background-color: #f5f5f5;
+}
+
+.button:hover, button:hover, input[type="button"]:hover, input[type="submit"]:hover {
+    color: #ce1126;
+    background-color: #eeeeee;
 }
 
 /* Override jqClock formatting */

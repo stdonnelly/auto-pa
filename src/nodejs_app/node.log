@@ -1,0 +1,527 @@
+[2022-04-29T01:54:02.675Z]: Server started
+[2022-04-29T01:54:33.778Z]: Adding task:
+    [object Object]
+Successfully added task
+Tast list as JSON:
+[
+  {
+    sound_file: '/media/usb0/song1.mp3',
+    play_time: '06:00',
+    week_days: 'MTWRF',
+    start_date: '2022-06-19',
+    end_date: '2022-07-23'
+  },
+  {
+    sound_file: '/media/usb0/song2.mp3',
+    play_time: '12:00',
+    week_days: 'MW',
+    start_date: null,
+    end_date: '2022-08-20'
+  },
+  {
+    sound_file: '/media/usb0/song3.mp3',
+    play_time: '23:00',
+    week_days: 'S',
+    start_date: '2022-03-05',
+    end_date: '2022-03-06'
+  },
+  {
+    sound_file: 'song.mp3',
+    play_time: '00:30',
+    week_days: 'W',
+    start_date: '2022-04-04',
+    end_date: '2022-04-12'
+  },
+  {
+    sound_file: 'song.mp3',
+    play_time: '01:00',
+    week_days: 'UMT',
+    start_date: '2022-03-29',
+    end_date: '2022-04-13'
+  },
+  {
+    sound_file: 'sound.mp3',
+    play_time: '01:30',
+    week_days: 'TWR',
+    start_date: '2022-04-27',
+    end_date: '2022-04-20'
+  },
+  {
+    sound_file: 'effect.mp3',
+    play_time: '00:30',
+    week_days: 'WRFS',
+    start_date: '2022-04-05',
+    end_date: '2022-04-20'
+  }
+]
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T01:56:00.753Z]: Server started
+[2022-04-29T01:56:16.517Z]: Adding task:
+{
+  sound_file: 'effect.mp3',
+  play_time: '00:30',
+  week_days: 'WRFS',
+  start_date: '2022-04-05',
+  end_date: '2022-04-20'
+}
+Successfully added task
+Tast list as JSON:
+[
+  {
+    sound_file: '/media/usb0/song1.mp3',
+    play_time: '06:00',
+    week_days: 'MTWRF',
+    start_date: '2022-06-19',
+    end_date: '2022-07-23'
+  },
+  {
+    sound_file: '/media/usb0/song2.mp3',
+    play_time: '12:00',
+    week_days: 'MW',
+    start_date: null,
+    end_date: '2022-08-20'
+  },
+  {
+    sound_file: '/media/usb0/song3.mp3',
+    play_time: '23:00',
+    week_days: 'S',
+    start_date: '2022-03-05',
+    end_date: '2022-03-06'
+  },
+  {
+    sound_file: 'song.mp3',
+    play_time: '00:30',
+    week_days: 'W',
+    start_date: '2022-04-04',
+    end_date: '2022-04-12'
+  },
+  {
+    sound_file: 'song.mp3',
+    play_time: '01:00',
+    week_days: 'UMT',
+    start_date: '2022-03-29',
+    end_date: '2022-04-13'
+  },
+  {
+    sound_file: 'sound.mp3',
+    play_time: '01:30',
+    week_days: 'TWR',
+    start_date: '2022-04-27',
+    end_date: '2022-04-20'
+  },
+  {
+    sound_file: 'effect.mp3',
+    play_time: '00:30',
+    week_days: 'WRFS',
+    start_date: '2022-04-05',
+    end_date: '2022-04-20'
+  },
+  {
+    sound_file: 'effect.mp3',
+    play_time: '00:30',
+    week_days: 'WRFS',
+    start_date: '2022-04-05',
+    end_date: '2022-04-20'
+  }
+]
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T01:56:32.092Z]: Adding task:
+{
+  sound_file: 'effect.mp3',
+  play_time: '00:30',
+  week_days: 'TWR',
+  start_date: '2022-04-05',
+  end_date: '2022-04-20'
+}
+Successfully added task
+Tast list as JSON:
+[
+  {
+    sound_file: '/media/usb0/song1.mp3',
+    play_time: '06:00',
+    week_days: 'MTWRF',
+    start_date: '2022-06-19',
+    end_date: '2022-07-23'
+  },
+  {
+    sound_file: '/media/usb0/song2.mp3',
+    play_time: '12:00',
+    week_days: 'MW',
+    start_date: null,
+    end_date: '2022-08-20'
+  },
+  {
+    sound_file: '/media/usb0/song3.mp3',
+    play_time: '23:00',
+    week_days: 'S',
+    start_date: '2022-03-05',
+    end_date: '2022-03-06'
+  },
+  {
+    sound_file: 'song.mp3',
+    play_time: '00:30',
+    week_days: 'W',
+    start_date: '2022-04-04',
+    end_date: '2022-04-12'
+  },
+  {
+    sound_file: 'song.mp3',
+    play_time: '01:00',
+    week_days: 'UMT',
+    start_date: '2022-03-29',
+    end_date: '2022-04-13'
+  },
+  {
+    sound_file: 'sound.mp3',
+    play_time: '01:30',
+    week_days: 'TWR',
+    start_date: '2022-04-27',
+    end_date: '2022-04-20'
+  },
+  {
+    sound_file: 'effect.mp3',
+    play_time: '00:30',
+    week_days: 'WRFS',
+    start_date: '2022-04-05',
+    end_date: '2022-04-20'
+  },
+  {
+    sound_file: 'effect.mp3',
+    play_time: '00:30',
+    week_days: 'WRFS',
+    start_date: '2022-04-05',
+    end_date: '2022-04-20'
+  },
+  {
+    sound_file: 'effect.mp3',
+    play_time: '00:30',
+    week_days: 'TWR',
+    start_date: '2022-04-05',
+    end_date: '2022-04-20'
+  }
+]
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T01:58:16.272Z]: Server started
+[2022-04-29T01:58:18.384Z]: Adding task:
+{
+  sound_file: 'effect.mp3',
+  play_time: '00:30',
+  week_days: 'TWR',
+  start_date: '2022-04-05',
+  end_date: '2022-04-20'
+}
+Successfully added task
+crontab file:
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T01:59:37.645Z]: Server started
+[2022-04-29T01:59:52.887Z]: Adding task:
+Successfully added task
+crontab file:
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T02:00:01.453Z]: Adding task:
+Successfully added task
+crontab file:
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T02:00:42.444Z]: Adding task:
+Successfully added task
+crontab file:
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T02:00:59.161Z]: Adding task:
+Successfully added task
+crontab file:
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T02:02:27.924Z]: Server started
+[2022-04-29T02:02:31.174Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '23:00',
+  week_days: 'TW',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+Successfully added task
+crontab file:
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T02:08:34.102Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+Successfully added task
+crontab file:
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T02:08:45.357Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+Successfully added task
+crontab file:
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T02:08:48.332Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+Successfully added task
+crontab file:
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T02:08:49.871Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+Successfully added task
+crontab file:
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T02:09:04.900Z]: Server started
+[2022-04-29T02:09:09.384Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+ReferenceError: newTask is not defined
+    at /home/samuel/Programs/PA/src/nodejs_app/api.js:83:39
+    at Layer.handle [as handle_request] (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/layer.js:95:5)
+    at /home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/index.js:341:12)
+    at next (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/index.js:275:10)
+    at /home/samuel/Programs/PA/src/nodejs_app/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/home/samuel/Programs/PA/src/nodejs_app/node_modules/raw-body/index.js:224:16)
+[2022-04-29T02:09:49.750Z]: Server started
+[2022-04-29T02:09:52.188Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+ReferenceError: newTask is not defined
+    at /home/samuel/Programs/PA/src/nodejs_app/api.js:83:39
+    at Layer.handle [as handle_request] (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/layer.js:95:5)
+    at /home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/index.js:341:12)
+    at next (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/index.js:275:10)
+    at /home/samuel/Programs/PA/src/nodejs_app/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/home/samuel/Programs/PA/src/nodejs_app/node_modules/raw-body/index.js:224:16)
+[2022-04-29T02:10:19.865Z]: Server started
+[2022-04-29T02:10:22.532Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+ReferenceError: newTask is not defined
+    at /home/samuel/Programs/PA/src/nodejs_app/api.js:83:39
+    at Layer.handle [as handle_request] (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/layer.js:95:5)
+    at /home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/index.js:341:12)
+    at next (/home/samuel/Programs/PA/src/nodejs_app/node_modules/express/lib/router/index.js:275:10)
+    at /home/samuel/Programs/PA/src/nodejs_app/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/home/samuel/Programs/PA/src/nodejs_app/node_modules/raw-body/index.js:224:16)
+[2022-04-29T02:11:13.837Z]: Server started
+[2022-04-29T02:11:22.558Z]: Server started
+[2022-04-29T02:11:26.726Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}

@@ -50,25 +50,6 @@ $(function () {
         $time.timepicker({timeFormat: 'H:i'});
     }
 
-    // Update taskListJSON
-    // Actual client
-    // $.ajax({
-    //     url: "/api/task_list.json",
-    //     dataType: "text", // I need it to interpret as text, so I can use a reviver
-    //     success: function(data) {
-    //         taskListJSON = data;
-    //
-    //         // Generate the tables
-    //         if ($("table").length > 0) {
-    //             updateTables();
-    //         }
-    //     },
-    //     error: function() {
-    //         console.log("Error while getting task list");
-    //     }
-    // });
-
-    // Emulated ITIS 3135 version
     updateTables();
 
     // All of these if statements are so the functions only trigger on elements that are actually present.
@@ -91,80 +72,99 @@ $(function () {
 // This is a function because it will be used by multiple functions whenever I can change the JSON
 function updateTables() {
     // Get task list JSON file from server
-    let taskList = JSON.parse(localStorage.getItem('taskList'), function (key, value) {
-        if (key.endsWith('_date')) {
-            if (value) {
-                // Change the string to an array so that the Date constructor works
-                // https://stackoverflow.com/questions/33908299/javascript-parse-a-string-to-date-as-local-time-zone
-                let ymd = value.split('-');
 
-                // Parse the array
-                return new Date(ymd[0], ymd[1] - 1, ymd[2]);
-            } else {
-                return null;
+    // Update taskListJSON
+    // Actual client
+    $.ajax({
+        url: "/api/task_list.json",
+        dataType: "text", // I need it to interpret as text, so I can use a reviver
+        success: function(data) {
+            let taskListJSON = data;
+    
+            // Generate the tables
+            if ($("table").length > 0) {
+                let taskList = JSON.parse(taskListJSON, function (key, value) {
+                    if (key.endsWith('_date')) {
+                        if (value) {
+                            // Change the string to an array so that the Date constructor works
+                            // https://stackoverflow.com/questions/33908299/javascript-parse-a-string-to-date-as-local-time-zone
+                            let ymd = value.split('-');
+            
+                            // Parse the array
+                            return new Date(ymd[0], ymd[1] - 1, ymd[2]);
+                        } else {
+                            return null;
+                        }
+                    }
+                    return value;
+                });
+            
+                // $("#log-3 > code").text(JSON.stringify(taskList, null, '    '));
+                // hljs.highlightAll();
+            
+                let $scheduleTable = $("table tbody");
+            
+                // Check if there is a table
+                if ($scheduleTable.length > 0) {
+                    // Generate the table
+                    let $newTable = $("<tbody>");
+            
+                    // Generate table headers
+                    $newTable.append(
+                        $("<tr>").html(`
+                        <th scope="col">Filename</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Weekdays</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">End</th>`
+                        ));
+            
+                    // Only loop through if taskList is not null
+                    if (taskList !== null) {
+                        for (const task of taskList) {
+                            let $row = $("<tr>");
+            
+                            $row.append($("<td>").text(task.sound_file));
+                            $row.append($("<td>").text(task.play_time));
+                            $row.append($("<td>").text(task.week_days));
+            
+                            // Check if the last two are null before trying to parse using a simple conditional expression
+                            $row.append($("<td>").text(task.start_date ? task.start_date.toLocaleDateString() : 'Immediately'));
+                            $row.append($("<td>").text(task.end_date ? task.end_date.toLocaleDateString() : 'Never'));
+            
+                            $newTable.append($row);
+                        }
+                    }
+            
+                    $scheduleTable.replaceWith($newTable);
+            
+                    // Add checkboxes if the table is the one in remove_or_configure_task.html
+                    let $cTable = $("#checkbox-table tr");
+                    // Add header for the checkboxes
+                    $cTable.first().append($("<th scope='col'>").text("Select"));
+            
+                    for (let i = 1; i < $cTable.length; i++) {
+                        let $input = $("<input>")
+                        $input.attr({
+                            type: "checkbox",
+                            "class": "table_box",
+                            "value": i - 1
+                        });
+            
+                        // enable/disable buttons as needed when checked or unchecked
+                        $input.change(enableButtons);
+            
+                        $cTable.eq(i).append($("<td>").append($input));
+                    }
+                }
             }
+        },
+        error: function() {
+            console.log("Error while getting task list");
         }
-        return value;
     });
 
-    // $("#log-3 > code").text(JSON.stringify(taskList, null, '    '));
-    // hljs.highlightAll();
-
-    let $scheduleTable = $("table tbody");
-
-    // Check if there is a table
-    if ($scheduleTable.length > 0) {
-        // Generate the table
-        let $newTable = $("<tbody>");
-
-        // Generate table headers
-        $newTable.append(
-            $("<tr>").html(`
-            <th scope="col">Filename</th>
-            <th scope="col">Time</th>
-            <th scope="col">Weekdays</th>
-            <th scope="col">Start</th>
-            <th scope="col">End</th>`
-            ));
-
-        // Only loop through if taskList is not null
-        if (taskList !== null) {
-            for (const task of taskList) {
-                let $row = $("<tr>");
-
-                $row.append($("<td>").text(task.sound_file));
-                $row.append($("<td>").text(task.play_time));
-                $row.append($("<td>").text(task.week_days));
-
-                // Check if the last two are null before trying to parse using a simple conditional expression
-                $row.append($("<td>").text(task.start_date ? task.start_date.toLocaleDateString() : 'Immediately'));
-                $row.append($("<td>").text(task.end_date ? task.end_date.toLocaleDateString() : 'Never'));
-
-                $newTable.append($row);
-            }
-        }
-
-        $scheduleTable.replaceWith($newTable);
-
-        // Add checkboxes if the table is the one in remove_or_configure_task.html
-        let $cTable = $("#checkbox-table tr");
-        // Add header for the checkboxes
-        $cTable.first().append($("<th scope='col'>").text("Select"));
-
-        for (let i = 1; i < $cTable.length; i++) {
-            let $input = $("<input>")
-            $input.attr({
-                type: "checkbox",
-                "class": "table_box",
-                "value": i - 1
-            });
-
-            // enable/disable buttons as needed when checked or unchecked
-            $input.change(enableButtons);
-
-            $cTable.eq(i).append($("<td>").append($input));
-        }
-    }
+    
 }
 
 // Add schedule item
@@ -182,50 +182,68 @@ function addTask(event) {
     console.log(newTask);
 
     // ITIS 3135
-    let taskList = JSON.parse(localStorage.getItem('taskList'));
+    // let taskList = JSON.parse(localStorage.getItem('taskList'));
 
-    // Make sure it is an array
-    if (!Array.isArray(taskList)) {
-        taskList = [];
-    }
+    // // Make sure it is an array
+    // if (!Array.isArray(taskList)) {
+    //     taskList = [];
+    // }
 
-    // If the task does not already exist, add it
-    // Check is new task exists
-    let exists = false;
-    checkTask:
-        for (const task of taskList) {
+    // // If the task does not already exist, add it
+    // // Check if new task exists
+    // let exists = false;
+    // checkTask:
+    //     for (const task of taskList) {
 
-            // Check each element
-            for (const taskKey in task) {
-                // Break if not identical
-                if (task[taskKey] !== newTask[taskKey]) {
-                    continue checkTask;
-                }
-            }
+    //         // Check each element
+    //         for (const taskKey in task) {
+    //             // Break if not identical
+    //             if (task[taskKey] !== newTask[taskKey]) {
+    //                 continue checkTask;
+    //             }
+    //         }
 
-            // If the for loop does not break, mark as exists
-            exists = true;
-            break;
-        }
+    //         // If the for loop does not break, mark as exists
+    //         exists = true;
+    //         break;
+    //     }
 
-    if (!exists) {
-        taskList.push(newTask);
-        localStorage.setItem('taskList', JSON.stringify(taskList));
-    }
-
+    // if (!exists) {
+    //     taskList.push(newTask);
+    //     localStorage.setItem('taskList', JSON.stringify(taskList));
+    // }
 
     // Actual client
-    // $.ajax({
-    //     url: "/api/task_list_item",
-    //     data: newTask,
-    //     contentType: 'application/json',
-    //     success: function () {
-    //         console.log("Successfully updated json");
-    //     },
-    //     error: function () {
-    //         console.log("Error while posting new data");
-    //     }
-    // });
+    $.ajax({
+        url: "/api/task_list.json",
+        dataType: "text", // I need it to interpret as text, so I can use a reviver
+        success: function(data) {
+            taskListJSON = data;
+    
+            // Generate the tables
+            if ($("table").length > 0) {
+                updateTables();
+            }
+        },
+        error: function() {
+            console.log("Error while getting task list");
+        }
+    });
+
+    // Actual client
+    $.ajax({
+        url: "/api/task_list_item",
+        data: JSON.stringify(newTask),
+        method: "post",
+        dataType: "json",
+        contentType: 'application/json',
+        success: function (data) {
+            console.log(data.success);
+        },
+        error: function (data) {
+            console.log(data.error);
+        }
+    });
 
     event.preventDefault();
 }

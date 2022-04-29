@@ -45,27 +45,23 @@
     </nav>
 </header>
 
-<!-- This page will probably be for log files -->
-<h2>System logs</h2>
-<div id="logs-tabs">
-    <ul>
-        <li><a href="#log-1">log.txt</a></li>
-        <li><a href="#log-2">log2.txt</a></li>
-<!--        <li><a href="#log-3">Raw JSON</a></li>-->
-    </ul>
-    <div id="log-1" class="log">
-        2022-03-05T23:00:00 : Played sound.mp3<br>
-        2022-06-20T06:00:00 : Played song.mp3<br>
-        2022-06-20T12:00:00 : Played effect.mp3<br>
-        2022-06-21T06:00:00 : Played song.mp3<br>
-        2022-06-22T06:00:00 : Played song.mp3<br>
-        2022-06-22T12:00:00 : Played effect.mp3
-    </div>
-    <div id="log-2" class="log">
-        2022-03-06T00:00:00 : Removed sound.mp3
-    </div>
-<!--    <pre id="log-3" class="log"><code></code></pre>-->
-</div>
+<main>
+    <!-- This page will probably be for log files -->
+    <section>
+        <h2>System logs</h2>
+        <div id="logs-tabs">
+            <ul>
+                <li><a href="#log-1">node.log</a></li>
+                <li><a href="#log-2">vlc_manual.log</a></li>
+                <!--        <li><a href="#log-3">Raw JSON</a></li>-->
+                <li><a href="#log-3">vlc_auto.log</a></li>
+            </ul>
+            <pre id="log-1" class="log"></pre>
+            <pre id="log-2" class="log"></pre>
+            <pre id="log-3" class="log"></pre>
+        </div>
+    </section>
+</main>
 
 <footer>
     Created by Samuel Donnelly for <a href="https://www.piedmontcouncilbsa.org/cbs">BSA Camp Bud Schiele</a>

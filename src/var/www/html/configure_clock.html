@@ -40,31 +40,35 @@
     </nav>
 </header>
 
-<section id="clock-section">
-    <a href="configure_clock.html">
-        <!-- div is used so the whole area, not just text, is a hyperlink -->
-        <div>
-            <h2>Current Time</h2>
-            <h3>PA System</h3>
-            <!-- The date and time, according to the server, using server-side scripts
-            This will be used for scheduling, since the server cannot connect to the internet to set its own time -->
-            <div id="server-clock"></div>
-            <h3>Your Device</h3>
-            <!-- This one will use client-side JavaScript in order to compare the server with the (usually more correct) client -->
-            <div id="client-clock"></div>
-        </div>
-    </a>
-</section>
+<main>
+    <section id="clock-section">
+        <a href="configure_clock.html">
+            <!-- div is used so the whole area, not just text, is a hyperlink -->
+            <div>
+                <h2>Current Time</h2>
+                <h3>PA System</h3>
+                <!-- The date and time, according to the server, using server-side scripts
+                This will be used for scheduling, since the server cannot connect to the internet to set its own time -->
+                <div id="server-clock"></div>
+                <h3>Your Device</h3>
+                <!-- This one will use client-side JavaScript in order to compare the server with the (usually more correct) client -->
+                <div id="client-clock"></div>
+            </div>
+        </a>
+    </section>
 
-<h2>New Time</h2>
-<form>
-    <label for="new-time">New date and time:</label>
-    <input type="time" id="new-time"><br>
-    <label for="new-date"></label>
-    <input type="date" id="new-date"><br><br>
-    <input type="submit" value="Update server time"><br>
-    <button>Use device time</button>
-</form>
+    <section>
+        <h2>New Time</h2>
+        <form>
+            <label for="new-time">New date and time:</label>
+            <input type="time" id="new-time" step="1" required><br>
+            <label for="new-date"></label>
+            <input type="date" id="new-date" required><br><br>
+            <button id="update_time" type="button">Update server time</button><br>
+            <button id="device_time" type="button">Use device time</button>
+        </form>
+    </section>
+</main>
 
 <footer>
     Created by Samuel Donnelly for <a href="https://www.piedmontcouncilbsa.org/cbs">BSA Camp Bud Schiele</a>

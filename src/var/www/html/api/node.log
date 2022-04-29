@@ -1,0 +1,124 @@
+[2022-04-29T02:08:45.357Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+Successfully added task
+crontab file:
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T02:08:48.332Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+Successfully added task
+crontab file:
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T02:08:49.871Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+Successfully added task
+crontab file:
+0 6 * * 1,2,3,4,5 cvlc /media/usb0/song1.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 12 * * 1,3 cvlc /media/usb0/song2.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 6 cvlc /media/usb0/song3.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 0,1,2 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 1 * * 2,3,4 cvlc sound.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 3,4,5,6 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3,4 cvlc effect.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+30 0 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 23 * * 2,3 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+0 1 * * 1 cvlc song.mp3 --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1
+
+[2022-04-29T02:09:04.900Z]: Server started
+[2022-04-29T02:09:09.384Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+[2022-04-29T02:09:49.750Z]: Server started
+[2022-04-29T02:09:52.188Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+[2022-04-29T02:10:19.865Z]: Server started
+[2022-04-29T02:10:22.532Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
+[2022-04-29T02:11:13.837Z]: Server started
+[2022-04-29T02:11:22.558Z]: Server started
+[2022-04-29T02:11:26.726Z]: Adding task:
+{
+  sound_file: 'song.mp3',
+  play_time: '01:00',
+  week_days: 'M',
+  start_date: '2022-04-06',
+  end_date: '2022-04-13'
+}
