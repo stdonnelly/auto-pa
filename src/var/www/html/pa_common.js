@@ -47,7 +47,7 @@ $(function () {
     let $playTime = $("#play_time");
     if ($playTime.length > 0) {
         // Using 24hr time because I don't want to deal with am/pm nonsense
-        $playTime.timepicker({timeFormat: 'H:i'});
+        $playTime.timepicker({ timeFormat: 'H:i' });
     }
 
     updateTables();
@@ -57,13 +57,13 @@ $(function () {
     // Tabs for status.html
     let $logTabs = $("#logs-tabs");
     if ($logTabs.length > 0) {
-        $.get("api/node.log", function(data) {
+        $.get("api/node.log", function (data) {
             $("#log-1").text(data);
         });
-        $.get("api/vlc_manual.log", function(data) {
+        $.get("api/vlc_manual.log", function (data) {
             $("#log-2").text(data);
         });
-        $.get("api/vlc_auto.log", function(data) {
+        $.get("api/vlc_auto.log", function (data) {
             $("#log-3").text(data);
             $logTabs.tabs();
         });
@@ -75,7 +75,19 @@ $(function () {
     $("#modify_task").click(modifyTask);
     $("#update_time").click(updateTime);
     $("#device_time").click(deviceTime);
+    $("#play_now").submit(playNow);
 
+
+    // Get list of items in the sounds directory
+    $fileSelector = $("#file_name");
+    if ($fileSelector.length > 0) {
+        $.get("api/files", function (data) {
+            for (const datum of data) {
+                $fileSelector.append($("<option>").text(datum));
+            }
+
+        });
+    }
 });
 
 // This is a function because it will be used by multiple functions whenever I can change the JSON
@@ -87,9 +99,9 @@ function updateTables() {
     $.ajax({
         url: "/api/task_list.json",
         dataType: "text", // I need it to interpret as text, so I can use a reviver
-        success: function(data) {
+        success: function (data) {
             let taskListJSON = data;
-    
+
             // Generate the tables
             if ($("table").length > 0) {
                 let taskList = JSON.parse(taskListJSON, function (key, value) {
@@ -98,7 +110,7 @@ function updateTables() {
                             // Change the string to an array so that the Date constructor works
                             // https://stackoverflow.com/questions/33908299/javascript-parse-a-string-to-date-as-local-time-zone
                             let ymd = value.split('-');
-            
+
                             // Parse the array
                             return new Date(ymd[0], ymd[1] - 1, ymd[2]);
                         } else {
@@ -107,17 +119,17 @@ function updateTables() {
                     }
                     return value;
                 });
-            
+
                 // $("#log-3 > code").text(JSON.stringify(taskList, null, '    '));
                 // hljs.highlightAll();
-            
+
                 let $scheduleTable = $("table tbody");
-            
+
                 // Check if there is a table
                 if ($scheduleTable.length > 0) {
                     // Generate the table
                     let $newTable = $("<tbody>");
-            
+
                     // Generate table headers
                     $newTable.append(
                         $("<tr>").html(`
@@ -127,31 +139,31 @@ function updateTables() {
                         <th scope="col">Start</th>
                         <th scope="col">End</th>`
                         ));
-            
+
                     // Only loop through if taskList is not null
                     if (taskList !== null) {
                         for (const task of taskList) {
                             let $row = $("<tr>");
-            
+
                             $row.append($("<td>").text(task.sound_file));
                             $row.append($("<td>").text(task.play_time));
                             $row.append($("<td>").text(task.week_days));
-            
+
                             // Check if the last two are null before trying to parse using a simple conditional expression
                             $row.append($("<td>").text(task.start_date ? task.start_date.toLocaleDateString() : 'Immediately'));
                             $row.append($("<td>").text(task.end_date ? task.end_date.toLocaleDateString() : 'Never'));
-            
+
                             $newTable.append($row);
                         }
                     }
-            
+
                     $scheduleTable.replaceWith($newTable);
-            
+
                     // Add checkboxes if the table is the one in remove_or_configure_task.html
                     let $cTable = $("#checkbox-table tr");
                     // Add header for the checkboxes
                     $cTable.first().append($("<th scope='col'>").text("Select"));
-            
+
                     for (let i = 1; i < $cTable.length; i++) {
                         let $input = $("<input>")
                         $input.attr({
@@ -159,21 +171,21 @@ function updateTables() {
                             "class": "table_box",
                             "value": i - 1
                         });
-            
+
                         // enable/disable buttons as needed when checked or unchecked
                         $input.change(enableButtons);
-            
+
                         $cTable.eq(i).append($("<td>").append($input));
                     }
                 }
             }
         },
-        error: function() {
+        error: function () {
             console.log("Error while getting task list");
         }
     });
 
-    
+
 }
 
 // Add schedule item
@@ -226,15 +238,15 @@ function addTask(event) {
     $.ajax({
         url: "/api/task_list.json",
         dataType: "text", // I need it to interpret as text, so I can use a reviver
-        success: function(data) {
+        success: function (data) {
             taskListJSON = data;
-    
+
             // Generate the tables
             if ($("table").length > 0) {
                 updateTables();
             }
         },
-        error: function() {
+        error: function () {
             console.log("Error while getting task list");
         }
     });
@@ -248,6 +260,9 @@ function addTask(event) {
         contentType: 'application/json',
         success: function (data) {
             console.log(data.success);
+
+            // Go back to configure sounds
+            location.href = "configure_sounds.html";
         },
         error: function (data) {
             console.log(data.error);
@@ -264,19 +279,33 @@ function removeTasks() {
         return parseInt($(checkedBox).val());
     });
 
-    // Probably a dumb way of removing tasks
-    let newTaskList = [];
-    for (const i in taskList) {
-        // Skip if the index is listed as one to delete
-        if (!checkedBoxes.includes(parseInt(i))) {
-            newTaskList.push(taskList[i]);
+    $.ajax({
+        url: "/api/task_list_item",
+        method: "delete",
+        contentType: 'application/json',
+        data: JSON.stringify(checkedBoxes),
+        dataType: "json",
+        success: function (data) {
+            console.log(data.success);
+
+            updateTables();
+        },
+        error: function (data) {
+            console.log(data.error);
         }
-    }
+    })
 
-    // Update localStorage and reload table
-    localStorage.setItem('taskList', JSON.stringify(newTaskList));
+    // // Probably a dumb way of removing tasks
+    // let newTaskList = [];
+    // for (const i in taskList) {
+    //     // Skip if the index is listed as one to delete
+    //     if (!checkedBoxes.includes(parseInt(i))) {
+    //         newTaskList.push(taskList[i]);
+    //     }
+    // }
 
-    updateTables();
+    // // Update localStorage and reload table
+    // localStorage.setItem('taskList', JSON.stringify(newTaskList));
 }
 
 function modifyTask() {
@@ -308,20 +337,54 @@ function enableButtons() {
     }
 }
 
+// TODO:
 function updateTime() {
-    let newDate = Date.parse($("#new-date").val() + ' ' + $("#new-time").val());
-    console.log(newDate);
+    let newDate = new Date($("#new-date").val() + ' ' + $("#new-time").val());
 
-    $("#server-clock").clock({
-        "timestamp": newDate
-    });
+    let isoString = newDate.toISOString().split('T')
+    
+    let dateString = isoString[0] + ' ' + isoString[1].split('.')[0];
+    // console.log(dateString);
+
+    // $("#server-clock").clock({
+    //     "timestamp": newDate
+    // });
 }
 
 function deviceTime() {
-    let newDate = Date.now();
-    console.log(newDate);
+    let newDate = new Date();
 
-    $("#server-clock").clock({
-        "timestamp": newDate
+    let isoString = newDate.toISOString().split('T')
+    
+    let dateString = isoString[0] + ' ' + isoString[1].split('.')[0];
+    // console.log(dateString);
+    $.ajax({
+        url: "/api/set_time",
+        method: "post",
+        contentType: 'application/json',
+        dataType: "json",
+        data: JSON.stringify({newDate: dateString}),
+        success: function (data) {
+            console.log(data.success);
+        },
+        error: function (data) {
+            console.log(data.error);
+        }
     });
+}
+
+function playNow(event) {
+    $.ajax({
+        url: "/api/play/" + $("#file_name").val(),
+        method: "post",
+        dataType: "json",
+        success: function (data) {
+            console.log(data.success);
+        },
+        error: function (data) {
+            console.log(data.error);
+        }
+    });
+
+    event.preventDefault();
 }

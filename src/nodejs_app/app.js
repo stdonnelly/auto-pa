@@ -25,13 +25,13 @@ app.all('*', function(req, res, next) {
     }
 })
 
+// Dynamic requests
+app.use('/api', api);
+
 // Static GET/HEAD requests
 app.head('/');
 app.use('/submodules', express.static('../../submodules/'));
 app.use(express.static('../var/www/html/'));
-
-// Dynamic requests
-app.use('/api', api);
 
 // Listen
 app.listen(port, function() {
