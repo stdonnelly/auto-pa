@@ -44,10 +44,10 @@ $(function () {
     }
 
     // Use jQuery timepicker because the html time input is garbage to work with
-    let $time = $("#play_time");
-    if ($time.length > 0) {
+    let $playTime = $("#play_time");
+    if ($playTime.length > 0) {
         // Using 24hr time because I don't want to deal with am/pm nonsense
-        $time.timepicker({timeFormat: 'H:i'});
+        $playTime.timepicker({timeFormat: 'H:i'});
     }
 
     updateTables();
@@ -57,16 +57,25 @@ $(function () {
     // Tabs for status.html
     let $logTabs = $("#logs-tabs");
     if ($logTabs.length > 0) {
-        // updateTables();
-        $logTabs.tabs({
-            heightStyle: "auto"
-
+        $.get("api/node.log", function(data) {
+            $("#log-1").text(data);
+        });
+        $.get("api/vlc_manual.log", function(data) {
+            $("#log-2").text(data);
+        });
+        $.get("api/vlc_auto.log", function(data) {
+            $("#log-3").text(data);
+            $logTabs.tabs();
         });
     }
 
     // Assign buttons
     $("#add_task").submit(addTask);
     $("#remove_tasks").click(removeTasks);
+    $("#modify_task").click(modifyTask);
+    $("#update_time").click(updateTime);
+    $("#device_time").click(deviceTime);
+
 });
 
 // This is a function because it will be used by multiple functions whenever I can change the JSON
@@ -270,6 +279,14 @@ function removeTasks() {
     updateTables();
 }
 
+function modifyTask() {
+    // Get the task index
+    let checkedBox = $(".table_box:checked").val();
+
+    // Load "add task" with the index
+    location.href = "add_task.html?replace=" + checkedBox;
+}
+
 function enableButtons() {
     // Check how many boxes are checked
     let numBoxes = $(".table_box:checked").length;
@@ -289,4 +306,22 @@ function enableButtons() {
         // Disable the button
         $("#modify_task").prop("disabled", true);
     }
+}
+
+function updateTime() {
+    let newDate = Date.parse($("#new-date").val() + ' ' + $("#new-time").val());
+    console.log(newDate);
+
+    $("#server-clock").clock({
+        "timestamp": newDate
+    });
+}
+
+function deviceTime() {
+    let newDate = Date.now();
+    console.log(newDate);
+
+    $("#server-clock").clock({
+        "timestamp": newDate
+    });
 }
