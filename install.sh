@@ -18,17 +18,24 @@ fi
 # List of required packages
 #packages=("vlc" "hostapd" "dnsmasq" "nodejs" "npm")
 
-# Make the auto-pa account
-useradd -Nr auto-pa
+# Get the default user (because pi is no longer default)
+user=$(id -nu 1000)
+
+# Add sudoers file
+echo $user ALL=(root) = NOPASSWD: /usr/bin/timedatectl > /etc/sudoers.d/auto-pa
+chmod 440 /etc/sudoers.d/auto-pa
 
 # Make the directory structure
 mkdir /var/auto-pa/
-chown auto-pa:$adminGroup /var/auto-pa/
+chown $user:$adminGroup /var/auto-pa/
 mkdir /var/log/auto-pa/
-chown auto-pa:$adminGroup /var/log/auto-pa/
+chown $user:$adminGroup /var/log/auto-pa/
 mkdir /usr/local/etc/auto-pa/
-chown auto-pa:$adminGroup /usr/local/etc/auto-pa/
+chown $user:$adminGroup /usr/local/etc/auto-pa/
+
+# Edit the service to run as the user (not root)
+
 
 # Switch to auto-pa for the last part
-su auto-pa
+su $user
 mkdir /var/auto-pa/html/
