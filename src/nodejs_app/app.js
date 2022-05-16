@@ -1,7 +1,7 @@
 // Express
 const express = require('express');
 const app = express();
-const port = 80;
+const port = 8080;
 
 // My modules
 const api = require('./api');
@@ -30,8 +30,7 @@ app.use('/api', api);
 
 // Static GET/HEAD requests
 app.head('/');
-app.use('/submodules', express.static('../../submodules/'));
-app.use(express.static('../var/www/html/'));
+app.use(express.static('/usr/local/etc/auto-pa/html/'));
 
 // Listen
 app.listen(port, function() {

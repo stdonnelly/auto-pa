@@ -4,8 +4,8 @@ const fs = require('fs');
 const { exec } = require('child_process');
 const reloadTasks = require('./reload_tasks');
 
-// const taskListFile = '/var/auto-pa/task_list.json';
-const TASK_LIST_FILE = '/home/samuel/Programs/PA/src/test_song_list.json';
+const TASK_LIST_FILE = '/var/auto-pa/task_list.json';
+// const TASK_LIST_FILE = '/home/samuel/Programs/PA/src/test_song_list.json';
 const USB_PATH = '/media/samuel/F29E-3BD7/'
 
 // Use parser

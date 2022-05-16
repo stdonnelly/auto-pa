@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# adminGroup="wheel"
-adminGroup="adm"
+adminGroup="wheel"
+# adminGroup="adm"
 
 # Checking if running as root
 if [ $(whoami) != 'root' ]
@@ -21,10 +21,6 @@ fi
 # Get the default user (because pi is no longer default)
 user=$(id -nu 1000)
 
-# Add sudoers file
-echo $user ALL=(root) = NOPASSWD: /usr/bin/timedatectl > /etc/sudoers.d/auto-pa
-chmod 440 /etc/sudoers.d/auto-pa
-
 # Make the directory structure
 mkdir /var/auto-pa/
 chown $user:$adminGroup /var/auto-pa/
@@ -33,8 +29,16 @@ chown $user:$adminGroup /var/log/auto-pa/
 mkdir /usr/local/etc/auto-pa/
 chown $user:$adminGroup /usr/local/etc/auto-pa/
 
-# Edit the service to run as the user (not root)
+# Add sudoers file
+echo $user ALL=(root) = NOPASSWD: /usr/bin/timedatectl > /etc/sudoers.d/auto-pa
+chmod 440 /etc/sudoers.d/auto-pa
 
+# Redirect port 80 to port 8080 so node can be run without root
+iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+iptables-save > /etc/iptables/rules.v4
+
+# Edit the service to run as the user (not root)
+sed -i "s/#USER/User=$user/" /etc/systemd/system/auto-pa.service
 
 # Switch to auto-pa for the last part
 su $user
