@@ -14,9 +14,8 @@ else
     exit 0
 fi
 
-# Make sure all required packages are installed
-# List of required packages
-#packages=("vlc" "hostapd" "dnsmasq" "nodejs" "npm")
+# TODO: Make sure all required packages are installed
+# hostapd, dnsmasq, cvlc, nodejs, npm
 
 # Get the default user (because pi is no longer default)
 user=$(id -nu 1000)
@@ -28,6 +27,9 @@ mkdir /var/log/auto-pa/
 chown $user:$adminGroup /var/log/auto-pa/
 mkdir /usr/local/etc/auto-pa/
 chown $user:$adminGroup /usr/local/etc/auto-pa/
+
+# Copy "/etc"
+rsync -rt src/etc/ /etc/
 
 # Add sudoers file
 echo $user ALL=(root) = NOPASSWD: /usr/bin/timedatectl > /etc/sudoers.d/auto-pa
@@ -42,4 +44,4 @@ sed -i "s/#USER/User=$user/" /etc/systemd/system/auto-pa.service
 
 # Switch to auto-pa for the last part
 su $user
-mkdir /var/auto-pa/html/
+cp -r src/var/auto-pa /var/auto-pa/
