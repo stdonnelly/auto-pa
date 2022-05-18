@@ -65,3 +65,8 @@ cp -r src/var/auto-pa /var/auto-pa/
 
 # Copy submoules into html
 cp -r submodules /usr/local/etc/auto-pa/html/
+
+# Install node.js dependencies
+echo 'Installing node.js dependencies'
+cd /usr/local/etc/auto-pa/nodejs_app/
+npm install
