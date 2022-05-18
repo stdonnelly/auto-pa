@@ -1,7 +1,8 @@
 // Express
 const express = require('express');
 const app = express();
-const port = 8080;
+// Port 80 is redirected to 8080 because a user is not allowed to open port 80
+const PORT = 8080;
 
 // My modules
 const api = require('./api');
@@ -33,6 +34,6 @@ app.head('/');
 app.use(express.static('/usr/local/etc/auto-pa/html/'));
 
 // Listen
-app.listen(port, function() {
+app.listen(PORT, function() {
   console.log(`[${new Date().toISOString()}]: Server started`);
 });

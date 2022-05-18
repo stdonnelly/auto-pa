@@ -8,7 +8,8 @@ This project was used for BSA Camp Bud Schiele, the summer camp for the [Piedmon
 There is also a configuration interface accessable by a captive portal on the WiFi network hosted by the Pi.
 
 ## Installation
-`sudo ./install.sh`
+Clone this repository. Open the terminal in the root folder of this repository.
+Run `sudo ./install.sh`
 
 This will also install the required packages using apt if they are not already installed.
 

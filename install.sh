@@ -9,18 +9,16 @@ then
     echo "Script must be run as root"
     echo "Use 'sudo ./install'"
     exit 1
-else
-    echo "Running as root"
-    exit 0
 fi
 
 # TODO: Make sure all required packages are installed
-# hostapd, dnsmasq, cvlc, nodejs, npm
+dependencies=('hostapd' 'dnsmasq' 'cvlc' 'nodejs' 'npm')
 
 # Get the default user (because pi is no longer default)
 user=$(id -nu 1000)
 
 # Make the directory structure
+echo 'Making directories'
 mkdir /var/auto-pa/
 chown $user:$adminGroup /var/auto-pa/
 mkdir /var/log/auto-pa/
@@ -29,9 +27,11 @@ mkdir /usr/local/etc/auto-pa/
 chown $user:$adminGroup /usr/local/etc/auto-pa/
 
 # Copy "/etc"
+echo 'Copying "/etc" folder'
 rsync -rt src/etc/ /etc/
 
 # Add sudoers file
+echo 'Modifying sudoers, iptables, and the auto-pa service'
 echo $user ALL=(root) = NOPASSWD: /usr/bin/timedatectl > /etc/sudoers.d/auto-pa
 chmod 440 /etc/sudoers.d/auto-pa
 
@@ -42,6 +42,26 @@ iptables-save > /etc/iptables/rules.v4
 # Edit the service to run as the user (not root)
 sed -i "s/#USER/User=$user/" /etc/systemd/system/auto-pa.service
 
+# Change the WiFi password
+read -p "Enter a password for the new WiFi network (default: raspberry): " pass
+if [$pass != ''] # Only change if something was actually entered
+then
+    sed -i "s/wpa_passphrase=raspberry/wpa_passphrase=$pass/" /etc/hostapd/hostapd.conf
+fi
+
+# Enable and start services
+echo 'Starting daemons'
+systemctl daemon-reload
+systemctl unmask hostapd
+systemctl enable hostapd dnsmasq auto-pa
+systemctl start hostapd dnsmasq auto-pa
+
 # Switch to auto-pa for the last part
-su $user
+su - $user
+
+# Copy var
+echo 'Copying "/var" and "/usr/local"'
 cp -r src/var/auto-pa /var/auto-pa/
+
+# Copy submoules into html
+cp -r submodules /usr/local/etc/auto-pa/html/

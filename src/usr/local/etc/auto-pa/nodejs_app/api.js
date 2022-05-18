@@ -6,7 +6,8 @@ const reloadTasks = require('./reload_tasks');
 
 const TASK_LIST_FILE = '/var/auto-pa/task_list.json';
 // const TASK_LIST_FILE = '/home/samuel/Programs/PA/src/test_song_list.json';
-const USB_PATH = '/media/samuel/F29E-3BD7/'
+// TODO: Make this work for multiple different devices
+const USB_PATH = '/media/pi/F29E-3BD7/'
 
 // Use parser
 router.use(express.json());
@@ -124,6 +125,7 @@ router.post('/task_list_item', function (req, res) {
 
 });
 
+// TODO: Sanitize inputs, or at least rely on client-side a little less.
 // Play now (this is a major security flaw, but I don't care right now)
 router.post('/play/:filename', function (req, res) {
     let filename = USB_PATH + req.params.filename;
@@ -146,7 +148,6 @@ router.post('/set_time', function (req, res) {
         if (error) {
             console.log(error);
         }
-        // TODO: Log to /var/log/auto-pa/vlc_manual.log instead
         console.log(stdout);
     });
 });
