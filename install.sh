@@ -1,6 +1,6 @@
 #!/bin/bash
 
-adminGroup="wheel"
+adminGroup="pi"
 # adminGroup="adm"
 
 # Checking if running as root
@@ -32,7 +32,7 @@ rsync -rt src/etc/ /etc/
 
 # Add sudoers file
 echo 'Modifying sudoers, iptables, and the auto-pa service'
-echo $user ALL=(root) = NOPASSWD: /usr/bin/timedatectl > /etc/sudoers.d/auto-pa
+echo '$user ALL=(root) NOPASSWD: /usr/bin/timedatectl' > /etc/sudoers.d/auto-pa
 chmod 440 /etc/sudoers.d/auto-pa
 
 # Redirect port 80 to port 8080 so node can be run without root
@@ -44,7 +44,7 @@ sed -i "s/#USER/User=$user/" /etc/systemd/system/auto-pa.service
 
 # Change the WiFi password
 read -p "Enter a password for the new WiFi network (default: raspberry): " pass
-if [$pass != ''] # Only change if something was actually entered
+if [ ! -z "$pass" ] # Only change if something was actually entered
 then
     sed -i "s/wpa_passphrase=raspberry/wpa_passphrase=$pass/" /etc/hostapd/hostapd.conf
 fi
@@ -57,11 +57,13 @@ systemctl enable hostapd dnsmasq auto-pa
 systemctl start hostapd dnsmasq auto-pa
 
 # Switch to auto-pa for the last part
-su - $user
+#su - $user
 
 # Copy var
 echo 'Copying "/var" and "/usr/local"'
 cp -r src/var/auto-pa /var/auto-pa/
+
+cp -r src/usr/local/etc/auto-pa/ /usr/local/etc/
 
 # Copy submoules into html
 cp -r submodules /usr/local/etc/auto-pa/html/
