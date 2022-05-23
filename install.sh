@@ -52,6 +52,8 @@ fi
 # Switch to auto-pa for the last part
 #su - $user
 
+sudo -iu $user bash << END
+
 # Copy var
 echo 'Copying "/var" and "/usr/local"'
 cp -r src/var/auto-pa /var/auto-pa/
@@ -65,7 +67,7 @@ cp -r submodules /usr/local/etc/auto-pa/html/
 echo 'Installing node.js dependencies'
 cd /usr/local/etc/auto-pa/nodejs_app/
 npm install
-
+END
 
 # Enable and start services
 echo 'Starting daemons'
