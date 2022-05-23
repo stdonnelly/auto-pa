@@ -49,13 +49,6 @@ then
     sed -i "s/wpa_passphrase=raspberry/wpa_passphrase=$pass/" /etc/hostapd/hostapd.conf
 fi
 
-# Enable and start services
-echo 'Starting daemons'
-systemctl daemon-reload
-systemctl unmask hostapd
-systemctl enable hostapd dnsmasq auto-pa
-systemctl start hostapd dnsmasq auto-pa
-
 # Switch to auto-pa for the last part
 #su - $user
 
@@ -72,3 +65,11 @@ cp -r submodules /usr/local/etc/auto-pa/html/
 echo 'Installing node.js dependencies'
 cd /usr/local/etc/auto-pa/nodejs_app/
 npm install
+
+
+# Enable and start services
+echo 'Starting daemons'
+systemctl daemon-reload
+systemctl unmask hostapd
+systemctl enable hostapd dnsmasq auto-pa
+systemctl start hostapd dnsmasq auto-pa
