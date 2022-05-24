@@ -52,7 +52,7 @@ fi
 # Switch to auto-pa for the last part
 #su - $user
 
-sudo -iu $user bash << END
+sudo -u $user bash << END
 
 # Copy var
 echo 'Copying "/var" and "/usr/local"'

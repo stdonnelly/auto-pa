@@ -29,7 +29,7 @@ router.delete('/task_list_item', function (req, res) {
     // Get task list (I should probably be using promises instead of sync)
     let taskList = JSON.parse(fs.readFileSync(TASK_LIST_FILE, 'utf-8'));
     let newTaskList = [];
-    
+
     // Get index
     let index = req.body;
     for (const currIndex of index) {
@@ -130,7 +130,7 @@ router.post('/task_list_item', function (req, res) {
 router.post('/play/:filename', function (req, res) {
     let filename = USB_PATH + req.params.filename;
 
-    exec(`cvlc ${filename} --play-and-exit 2>&1`, function(error, stdout) {
+    exec(`cvlc ${filename} --play-and-exit 2>&1`, function (error, stdout) {
         if (error) {
             console.log(error);
         }
@@ -144,6 +144,12 @@ router.post('/play/:filename', function (req, res) {
 // Set time using device time
 router.post('/set_time', function (req, res) {
     // Again, I am doing this the insecure way
+    let timeString = String(req.body.year) +
+        '-' + String(req.body.month).padStart(2, '0') +
+        '-' + String(req.body.day).padStart(2, '0') +
+        ' ' + String(req.body.hour).padStart(2, '0') +
+        ':' + String(req.body.minute).padStart(2, '0') +
+        ':' + String(req.body.second).padStart(2, '0');
     exec('sudo timedatectl set-time "' + req.body.newDate + '" 2>&1', function (error, stdout) {
         if (error) {
             console.log(error);

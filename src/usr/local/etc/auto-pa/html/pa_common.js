@@ -341,7 +341,7 @@ function enableButtons() {
 function updateTime() {
     let newDate = new Date($("#new-date").val() + ' ' + $("#new-time").val());
 
-    let isoString = newDate.toISOString().split('T')
+    let isoString = newDate.toISOString().split('T');
     
     let dateString = isoString[0] + ' ' + isoString[1].split('.')[0];
     // console.log(dateString);
@@ -354,7 +354,7 @@ function updateTime() {
 function deviceTime() {
     let newDate = new Date();
 
-    let isoString = newDate.toISOString().split('T')
+    let isoString = newDate.toISOString().split('T');
     
     let dateString = isoString[0] + ' ' + isoString[1].split('.')[0];
     // console.log(dateString);
@@ -363,7 +363,14 @@ function deviceTime() {
         method: "post",
         contentType: 'application/json',
         dataType: "json",
-        data: JSON.stringify({newDate: dateString}),
+        data: JSON.stringify({
+            year: newDate.getFullYear(),
+            month: newDate.getMonth() + 1,
+            day: newDate.getDate(),
+            hour: newDate.getHours(),
+            minute: newDate.getMinutes(),
+            second: newDate.getSeconds()
+        }),
         success: function (data) {
             console.log(data.success);
         },
