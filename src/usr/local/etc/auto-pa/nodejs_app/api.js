@@ -7,7 +7,7 @@ const reloadTasks = require('./reload_tasks');
 const TASK_LIST_FILE = '/var/auto-pa/task_list.json';
 // const TASK_LIST_FILE = '/home/samuel/Programs/PA/src/test_song_list.json';
 // TODO: Make this work for multiple different devices
-const USB_PATH = '/media/pi/F29E-3BD7/';
+const USB_PATH = '/media/pi/F29E-3BD7/'
 
 // Use parser
 router.use(express.json());
@@ -16,6 +16,9 @@ router.use(express.json());
 router.get('/task_list.json', function (req, res) {
     res.sendFile(TASK_LIST_FILE);
 });
+
+// GET logs
+router.use('/log', express.static('/var/log/auto-pa/'));
 
 // GET file list
 router.get('/files', function (req, res) {

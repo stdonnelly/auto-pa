@@ -57,13 +57,13 @@ $(function () {
     // Tabs for status.html
     let $logTabs = $("#logs-tabs");
     if ($logTabs.length > 0) {
-        $.get("api/node.log", function (data) {
+        $.get("api/log/node.log", function (data) {
             $("#log-1").text(data);
         });
-        $.get("api/vlc_manual.log", function (data) {
+        $.get("api/log/vlc_manual.log", function (data) {
             $("#log-2").text(data);
         });
-        $.get("api/vlc_auto.log", function (data) {
+        $.get("api/log/vlc_auto.log", function (data) {
             $("#log-3").text(data);
             $logTabs.tabs();
         });
