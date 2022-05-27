@@ -56,7 +56,7 @@ sudo -u $user bash << END
 
 # Copy var
 echo 'Copying "/var" and "/usr/local"'
-cp -r src/var/auto-pa /var/auto-pa/
+cp -r src/var/auto-pa /var/
 
 cp -r src/usr/local/etc/auto-pa/ /usr/local/etc/
 
