@@ -150,11 +150,13 @@ router.post('/set_time', function (req, res) {
         ' ' + String(req.body.hour).padStart(2, '0') +
         ':' + String(req.body.minute).padStart(2, '0') +
         ':' + String(req.body.second).padStart(2, '0');
-    exec('sudo timedatectl set-time "' + req.body.newDate + '" 2>&1', function (error, stdout) {
+    exec('sudo timedatectl set-time "' + timeString + '" 2>&1', function (error, stdout) {
         if (error) {
             console.log(error);
+            res.json({ error: stdout });
         }
         console.log(stdout);
+        res.json({ success: "Changed time to " + timeString });
     });
 });
 

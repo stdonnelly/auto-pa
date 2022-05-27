@@ -4,7 +4,9 @@ Description=Node.js daemon for auto PA
 [Service]
 Type=simple
 #USER
-ExecStart=/usr/bin/nodejs /usr/local/etc/auto-pa/nodejs_app/app.js >> /var/log/auto-pa/node.log 2>&1
+ExecStart=/usr/bin/nodejs /usr/local/etc/auto-pa/nodejs_app/app.js
+StandardOutput=append:/var/log/auto-pa/node.log
+StandardError=append:/var/log/auto-pa/node.log
 
 [Install]
 WantedBy=multi-user.target

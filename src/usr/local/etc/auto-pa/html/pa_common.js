@@ -371,7 +371,12 @@ function deviceTime() {
             minute: newDate.getMinutes(),
             second: newDate.getSeconds()
         }),
-        success: function (data) {
+        success: function (data, textStatus, jqXHR) { // On success, update clock
+            serverTime = Date.parse(jqXHR.getResponseHeader("date"));
+            $("#server-clock").clock({
+                "timestamp": serverTime
+            });
+
             console.log(data.success);
         },
         error: function (data) {
