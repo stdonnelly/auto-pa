@@ -1,12 +1,13 @@
-const taskListFile = '/home/samuel/Programs/PA/src/test_song_list.json';
-const USB_PATH = '/media/samuel/F29E-3BD7/'
+const TASK_LIST_FILE = '/var/auto-pa/task_list.json';
+// TODO: Make this work for multiple different devices
+const USB_PATH = '/media/pi/F29E-3BD7/';
 
 const reloadTasks = function () {
     const fs = require('fs');
     const { exec } = require('child_process');
 
     // Import song list JSON
-    let taskList = JSON.parse(fs.readFileSync(taskListFile));
+    let taskList = JSON.parse(fs.readFileSync(TASK_LIST_FILE));
 
     // // Print contents
     // console.log('Tast list as JSON:');
@@ -44,7 +45,7 @@ const reloadTasks = function () {
         // Get all the weekdays except the last comma
         weeks = weeks.substring(0, weeks.length - 1);
 
-        crontabData += `${min} ${hour} * * ${weeks} /home/samuel/Programs/PA/src/usr/local/etc/auto-pa/execSound.sh ${USB_PATH + listEntry.sound_file} --play-and-exit >> /var/log/auto-pa/vlc_auto.log 2>&1\n`
+        crontabData += `${min} ${hour} * * ${weeks} /usr/local/etc/auto-pa/execSound.sh ${USB_PATH + listEntry.sound_file}\n`
     }
 
     console.log("crontab file:");
@@ -56,7 +57,6 @@ const reloadTasks = function () {
             console.log(err);
         } else {
             // Update crontab
-            //TODO:
             exec('crontab /tmp/pa_crontab');
         }
     });
