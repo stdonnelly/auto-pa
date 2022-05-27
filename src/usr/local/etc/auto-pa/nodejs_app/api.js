@@ -44,7 +44,7 @@ router.delete('/task_list_item', function (req, res) {
         }
     }
 
-    console.log(index);
+    // console.log(index);
 
     console.log(`[${new Date().toISOString()}]: Deleting items:`)
     for (const iStr in taskList) {
@@ -133,11 +133,19 @@ router.post('/task_list_item', function (req, res) {
 router.post('/play/:filename', function (req, res) {
     let filename = USB_PATH + req.params.filename;
 
+    console.log(`[${new Date().toISOString()}]: Playing ${filename}`);
+
     exec(`cvlc ${filename} --play-and-exit 2>&1`, function (error, stdout) {
         if (error) {
             console.log(error);
         }
-        // TODO: Log to /var/log/auto-pa/vlc_manual.log instead
+        // Log to /var/log/auto-pa/vlc_manual.log
+        fs.appendFile('/var/log/auto-pa/vlc_manual.log', stdout, function (err) {
+            if (err) {
+                console.log("Error while logging to vlc_manual.log");
+                console.log(err);
+            }
+        });
         console.log(stdout);
     });
 
@@ -146,6 +154,9 @@ router.post('/play/:filename', function (req, res) {
 
 // Set time using device time
 router.post('/set_time', function (req, res) {
+
+    console.log(`[${new Date().toISOString()}]: Setting time`);
+
     // Again, I am doing this the insecure way
     let timeString = String(req.body.year) +
         '-' + String(req.body.month).padStart(2, '0') +
@@ -159,6 +170,7 @@ router.post('/set_time', function (req, res) {
             res.json({ error: stdout });
         }
         res.json({ success: "Changed time to " + timeString });
+        console.log(`Updated clock to: ${timeString}`);
     });
 });
 
