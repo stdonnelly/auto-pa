@@ -45,7 +45,7 @@ const reloadTasks = function () {
         // Get all the weekdays except the last comma
         weeks = weeks.substring(0, weeks.length - 1);
 
-        crontabData += `${min} ${hour} * * ${weeks} /usr/local/etc/auto-pa/execSound.sh ${USB_PATH + listEntry.sound_file}\n`
+        crontabData += `${min} ${hour} * * ${weeks} /usr/local/etc/auto-pa/execSound.sh ${USB_PATH + listEntry.sound_file} >> /var/log/auto-pa/vlc_auto.log 2>&1\n`
     }
 
     console.log("crontab file:");

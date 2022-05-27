@@ -135,7 +135,7 @@ router.post('/play/:filename', function (req, res) {
 
     console.log(`[${new Date().toISOString()}]: Playing ${filename}`);
 
-    exec(`cvlc ${filename} --play-and-exit 2>&1`, function (error, stdout) {
+    exec(`/usr/local/etc/auto-pa/execSound.sh ${filename} 2>&1`, function (error, stdout) {
         if (error) {
             console.log(error);
         }
