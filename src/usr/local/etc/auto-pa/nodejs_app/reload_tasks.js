@@ -48,6 +48,8 @@ const reloadTasks = function () {
         crontabData += `${min} ${hour} * * ${weeks} /usr/local/etc/auto-pa/execSound.sh ${USB_PATH + listEntry.sound_file} >> /var/log/auto-pa/vlc_auto.log 2>&1\n`
     }
 
+    // TODO: Add reference to self in crontab so tasks are reloaded when the next task starts/expires
+
     console.log("crontab file:");
     console.log(crontabData);
 

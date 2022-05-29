@@ -137,13 +137,12 @@ router.post('/play/:filename', function (req, res) {
 
     exec(`/usr/local/etc/auto-pa/execSound.sh ${filename} 2>&1`, function (error, stdout) {
         // Log to /var/log/auto-pa/vlc_manual.log
-        fs.appendFile('/var/log/auto-pa/vlc_manual.log', `[${new Date().toISOString()}]\n` + stdout, function (err) {
+        fs.appendFile('/var/log/auto-pa/vlc_manual.log', stdout, function (err) {
             if (err) {
                 console.log("Error while logging to vlc_manual.log");
                 console.log(err);
             }
         });
-        console.log(stdout);
     });
 
     res.json({ success: "Playing " + filename });
