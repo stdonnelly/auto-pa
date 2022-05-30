@@ -31,16 +31,6 @@ $(function () {
                 console.log("Error while getting time");
             }
         });
-        //
-        // $.ajax({
-        //     url: 'http://time.google.com',
-        //     dataType: 'jsonp',
-        //     method: 'GET',
-        //     success: function (data, textStatus, jqXHR) {
-        //         console.log(data);
-        //         console.log(jqXHR.getResponseHeader("date"));
-        //     }
-        // });
     }
 
     // Use jQuery timepicker because the html time input is garbage to work with
@@ -95,7 +85,6 @@ function updateTables() {
     // Get task list JSON file from server
 
     // Update taskListJSON
-    // Actual client
     $.ajax({
         url: "/api/task_list.json",
         dataType: "text", // I need it to interpret as text, so I can use a reviver
@@ -199,42 +188,8 @@ function addTask(event) {
         end_date: $("#end_date").val()
     };
 
-    // Temporary
-    console.log(newTask);
+    // console.log(newTask);
 
-    // ITIS 3135
-    // let taskList = JSON.parse(localStorage.getItem('taskList'));
-
-    // // Make sure it is an array
-    // if (!Array.isArray(taskList)) {
-    //     taskList = [];
-    // }
-
-    // // If the task does not already exist, add it
-    // // Check if new task exists
-    // let exists = false;
-    // checkTask:
-    //     for (const task of taskList) {
-
-    //         // Check each element
-    //         for (const taskKey in task) {
-    //             // Break if not identical
-    //             if (task[taskKey] !== newTask[taskKey]) {
-    //                 continue checkTask;
-    //             }
-    //         }
-
-    //         // If the for loop does not break, mark as exists
-    //         exists = true;
-    //         break;
-    //     }
-
-    // if (!exists) {
-    //     taskList.push(newTask);
-    //     localStorage.setItem('taskList', JSON.stringify(taskList));
-    // }
-
-    // Actual client
     $.ajax({
         url: "/api/task_list.json",
         dataType: "text", // I need it to interpret as text, so I can use a reviver
@@ -251,7 +206,6 @@ function addTask(event) {
         }
     });
 
-    // Actual client
     $.ajax({
         url: "/api/task_list_item",
         data: JSON.stringify(newTask),
@@ -294,18 +248,6 @@ function removeTasks() {
             console.log(data.error);
         }
     })
-
-    // // Probably a dumb way of removing tasks
-    // let newTaskList = [];
-    // for (const i in taskList) {
-    //     // Skip if the index is listed as one to delete
-    //     if (!checkedBoxes.includes(parseInt(i))) {
-    //         newTaskList.push(taskList[i]);
-    //     }
-    // }
-
-    // // Update localStorage and reload table
-    // localStorage.setItem('taskList', JSON.stringify(newTaskList));
 }
 
 function modifyTask() {
@@ -337,26 +279,41 @@ function enableButtons() {
     }
 }
 
-// TODO:
+// Update time using the boxes
 function updateTime() {
     let newDate = new Date($("#new-date").val() + ' ' + $("#new-time").val());
 
-    let isoString = newDate.toISOString().split('T');
-    
-    let dateString = isoString[0] + ' ' + isoString[1].split('.')[0];
     // console.log(dateString);
+    $.ajax({
+        url: "/api/set_time",
+        method: "post",
+        contentType: 'application/json',
+        dataType: "json",
+        data: JSON.stringify({
+            year: newDate.getFullYear(),
+            month: newDate.getMonth() + 1,
+            day: newDate.getDate(),
+            hour: newDate.getHours(),
+            minute: newDate.getMinutes(),
+            second: newDate.getSeconds()
+        }),
+        success: function (data, textStatus, jqXHR) { // On success, update clock
+            serverTime = Date.parse(jqXHR.getResponseHeader("date"));
+            $("#server-clock").clock({
+                "timestamp": serverTime
+            });
 
-    // $("#server-clock").clock({
-    //     "timestamp": newDate
-    // });
+            console.log(data.success);
+        },
+        error: function (data) {
+            console.log(data.error);
+        }
+    });
 }
 
 function deviceTime() {
     let newDate = new Date();
 
-    let isoString = newDate.toISOString().split('T');
-    
-    let dateString = isoString[0] + ' ' + isoString[1].split('.')[0];
     // console.log(dateString);
     $.ajax({
         url: "/api/set_time",
