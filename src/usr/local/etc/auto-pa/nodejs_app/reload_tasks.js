@@ -6,8 +6,22 @@ const reloadTasks = function () {
     const fs = require('fs');
     const { exec } = require('child_process');
 
-    // Import song list JSON
-    let taskList = JSON.parse(fs.readFileSync(TASK_LIST_FILE));
+    // Import task list JSON
+    let taskList = JSON.parse(fs.readFileSync(TASK_LIST_FILE), function (key, value) {
+        if (key.endsWith('_date')) {
+            if (value) {
+                // Change the string to an array so that the Date constructor works
+                // https://stackoverflow.com/questions/33908299/javascript-parse-a-string-to-date-as-local-time-zone
+                let ymd = value.split('-');
+
+                // Parse the array
+                return new Date(ymd[0], ymd[1] - 1, ymd[2]);
+            } else {
+                return null;
+            }
+        }
+        return value;
+    });
 
     // // Print contents
     // console.log('Tast list as JSON:');
@@ -27,8 +41,33 @@ const reloadTasks = function () {
     // Make crontabData an empty string.
     let crontabData = '';
 
+    let now = new Date();
+    now.setHours(0, 0, 0, 0); // Make it only date, no time
+    let nextEvent = null;
+
     // Loop through the list
     for (const listEntry of taskList) {
+
+        // If now is after the event ends, ignore. (If end_date is not null (never) and now is later.)
+        if (listEntry.end_date && now > listEntry.end_date) {
+            break;
+        }
+
+        // Check if it either is current, or starts next. If start_date is not null (immediately) and now is earlier, break.
+        if (listEntry.start_date && now <= listEntry.start_date) {
+            // Check if it earlier than the next event (or it hasn't been set)
+            if (listEntry.start_date && (listEntry.start_date < nextEvent || !nextEvent)) {
+                nextEvent = listEntry.start_date;
+            }
+
+            break;
+        }
+
+        // Check if its ending is the next event
+        if (listEntry.end_date && (listEntry.end_date < nextEvent || !nextEvent)) {
+            nextEvent = listEntry.end_date;
+        }
+
         // Get the minute and hour
         // Should always be in this format: hh:mm
         let timeStr = listEntry.play_time.split(':');
@@ -45,10 +84,13 @@ const reloadTasks = function () {
         // Get all the weekdays except the last comma
         weeks = weeks.substring(0, weeks.length - 1);
 
-        crontabData += `${min} ${hour} * * ${weeks} /usr/local/etc/auto-pa/execSound.sh ${USB_PATH + listEntry.sound_file} >> /var/log/auto-pa/vlc_auto.log 2>&1\n`
+        crontabData += `${min} ${hour} * * ${weeks} /usr/local/etc/auto-pa/execSound.sh ${USB_PATH + listEntry.sound_file} >> /var/log/auto-pa/vlc_auto.log 2>&1\n`;
     }
 
-    // TODO: Add reference to self in crontab so tasks are reloaded when the next task starts/expires
+    // Add reference to self in crontab so tasks are reloaded when the next task starts/expires (if there is a next event)
+    if (nextEvent) {
+        crontabData += `0 0 ${nextEvent.getDate()} ${nextEvent.getMonth() + 1} * nodejs -e 'require("/usr/local/etc/auto-pa/nodejs_app/reload_tasks.js")()' >> /var/log/auto-pa/node.log 2>$1\n`;
+    }
 
     console.log("crontab file:");
     console.log(crontabData);
