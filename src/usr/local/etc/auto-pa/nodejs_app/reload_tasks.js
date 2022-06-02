@@ -50,7 +50,7 @@ const reloadTasks = function () {
 
         // If now is after the event ends, ignore. (If end_date is not null (never) and now is later.)
         if (listEntry.end_date && now > listEntry.end_date) {
-            break;
+            continue;
         }
 
         // Check if it either is current, or starts next. If start_date is not null (immediately) and now is earlier, break.
@@ -60,13 +60,15 @@ const reloadTasks = function () {
                 nextEvent = listEntry.start_date;
             }
 
-            break;
+            continue;
         }
 
         // Check if its ending is the next event
         if (listEntry.end_date && (listEntry.end_date < nextEvent || !nextEvent)) {
             nextEvent = listEntry.end_date;
         }
+        // console.log("Next event:");
+        // console.log(nextEvent);
 
         // Get the minute and hour
         // Should always be in this format: hh:mm
@@ -76,13 +78,19 @@ const reloadTasks = function () {
         let hour = parseInt(timeStr[0]);
 
         // Weeks
+        console.log(listEntry.week_days);
+        console.log(!!listEntry.week_days)
         let weeks = '';
-        for (const weekChar of listEntry.week_days) {
-            weeks += weekdays[weekChar] + ',';
+        if (listEntry.week_days) {
+            for (const weekChar of listEntry.week_days) {
+                weeks += weekdays[weekChar] + ',';
+            }
+            
+            // Get all the weekdays except the last comma
+            weeks = weeks.substring(0, weeks.length - 1);
+        } else {
+            weeks = '*';
         }
-
-        // Get all the weekdays except the last comma
-        weeks = weeks.substring(0, weeks.length - 1);
 
         crontabData += `${min} ${hour} * * ${weeks} /usr/local/etc/auto-pa/execSound.sh ${USB_PATH + listEntry.sound_file} >> /var/log/auto-pa/vlc_auto.log 2>&1\n`;
     }
