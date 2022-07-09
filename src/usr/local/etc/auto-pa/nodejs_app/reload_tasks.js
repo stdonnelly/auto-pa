@@ -92,7 +92,7 @@ const reloadTasks = function () {
             weeks = '*';
         }
 
-        crontabData += `${min} ${hour} * * ${weeks} /usr/local/etc/auto-pa/execSound.sh ${USB_PATH + listEntry.sound_file} >> /var/log/auto-pa/vlc_auto.log 2>&1\n`;
+        crontabData += `${min} ${hour} * * ${weeks} /usr/local/etc/auto-pa/execSound.sh "${USB_PATH + listEntry.sound_file}" >> /var/log/auto-pa/vlc_auto.log 2>&1\n`;
     }
 
     // Add reference to self in crontab so tasks are reloaded when the next task starts/expires (if there is a next event)
